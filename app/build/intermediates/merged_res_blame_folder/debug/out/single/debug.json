@@ -1,0 +1,30 @@
+[
+    {
+        "merged": "C:\\Users\\yusuf\\.gradle\\daemon\\8.7\\com.example.museomovil.app-merged_res-53:\\mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "C:\\Users\\yusuf\\.gradle\\daemon\\8.7\\com.example.museomovil.app-main-55:\\mipmap-anydpi-v26\\ic_launcher.xml"
+    },
+    {
+        "merged": "C:\\Users\\yusuf\\.gradle\\daemon\\8.7\\com.example.museomovil.app-merged_res-53:\\mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "C:\\Users\\yusuf\\.gradle\\daemon\\8.7\\com.example.museomovil.app-main-55:\\mipmap-anydpi-v26\\ic_launcher_round.xml"
+    },
+    {
+        "merged": "C:\\Users\\yusuf\\.gradle\\daemon\\8.7\\com.example.museomovil.app-merged_res-53:\\layout_activity_main.xml.flat",
+        "source": "C:\\Users\\yusuf\\.gradle\\daemon\\8.7\\com.example.museomovil.app-main-55:\\layout\\activity_main.xml"
+    },
+    {
+        "merged": "C:\\Users\\yusuf\\.gradle\\daemon\\8.7\\com.example.museomovil.app-merged_res-53:\\xml_backup_rules.xml.flat",
+        "source": "C:\\Users\\yusuf\\.gradle\\daemon\\8.7\\com.example.museomovil.app-main-55:\\xml\\backup_rules.xml"
+    },
+    {
+        "merged": "com.example.museomovil.app-merged_res-53:/layout_activity_main.xml.flat",
+        "source": "com.example.museomovil.app-main-55:/layout/activity_main.xml"
+    },
+    {
+        "merged": "C:\\Users\\yusuf\\.gradle\\daemon\\8.7\\com.example.museomovil.app-merged_res-53:\\xml_data_extraction_rules.xml.flat",
+        "source": "C:\\Users\\yusuf\\.gradle\\daemon\\8.7\\com.example.museomovil.app-main-55:\\xml\\data_extraction_rules.xml"
+    },
+    {
+        "merged": "C:\\Users\\yusuf\\.gradle\\daemon\\8.7\\com.example.museomovil.app-merged_res-53:\\drawable_sky_background.xml.flat",
+        "source": "C:\\Users\\yusuf\\.gradle\\daemon\\8.7\\com.example.museomovil.app-main-55:\\drawable\\sky_background.xml"
+    }
+]
