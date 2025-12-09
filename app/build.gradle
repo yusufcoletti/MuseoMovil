@@ -45,5 +45,5 @@ dependencies {
     // Libreria AR
     implementation 'io.github.sceneview:arsceneview:0.10.0'
 
-    implementation 'androidx.activity:activity:1.12.1'
+    implementation 'androidx.activity:activity:1.9.3'
 }

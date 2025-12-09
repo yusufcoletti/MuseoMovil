@@ -28,6 +28,12 @@ class MenuActivity : AppCompatActivity() {
             val intent = Intent(this, Vista3DActivity::class.java)
             startActivity(intent)
         }
+        // ArActivity
+        val cardAR = findViewById<CardView>(R.id.cardVistaAR)
+        cardAR.setOnClickListener {
+            val intent = Intent(this, ArActivity::class.java)
+            startActivity(intent)
+        }
 
         // --- CONFIGURACIÓN BOTÓN IDIOMA (Simple) ---
         val btnIdioma = findViewById<ImageButton>(R.id.btnIdiomaMenu)
