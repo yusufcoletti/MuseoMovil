@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.museomovil.app-mergeDebugResources-51:/values-w600dp-land-v13/values-w600dp-land-v13.xml",
+            "outputFile": "com.example.museomovil.app-mergeDebugResources-52:/values-w600dp-land-v13/values-w600dp-land-v13.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\yusuf\\.gradle\\caches\\transforms-4\\d6f3ed9c21e09b5eb64230e8d93e93e9\\transformed\\material-1.11.0\\res\\values-w600dp-land-v13\\values-w600dp-land-v13.xml",
+                    "source": "C:\\Users\\MITAR\\.gradle\\caches\\transforms-4\\d6f3ed9c21e09b5eb64230e8d93e93e9\\transformed\\material-1.11.0\\res\\values-w600dp-land-v13\\values-w600dp-land-v13.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",

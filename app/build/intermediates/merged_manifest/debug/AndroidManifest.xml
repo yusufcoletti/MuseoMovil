@@ -38,6 +38,12 @@
         android:testOnly="true"
         android:theme="@style/Theme.MuseoMovil" >
         <activity
+            android:name="com.example.museomovil.MenuActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.example.museomovil.Vista3DActivity"
+            android:exported="false" />
+        <activity
             android:name="com.example.museomovil.MainActivity"
             android:exported="true" >
             <intent-filter>

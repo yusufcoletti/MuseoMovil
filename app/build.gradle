@@ -38,4 +38,8 @@ dependencies {
     
     // Librería para visualización 3D (versión no-AR correcta)
     implementation "io.github.sceneview:sceneview:0.10.0"
+
+    // Lirería para animación de aviones (más profesional)
+    implementation 'com.airbnb.android:lottie:6.0.0'
+    implementation 'androidx.activity:activity:1.8.0'
 }

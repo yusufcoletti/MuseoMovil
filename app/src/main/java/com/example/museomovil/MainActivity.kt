@@ -1,70 +1,35 @@
 package com.example.museomovil
 
+import android.content.Intent
 import android.os.Bundle
+import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import io.github.sceneview.SceneView
-import io.github.sceneview.math.Position
-import io.github.sceneview.math.Rotation
-import io.github.sceneview.node.ModelNode
-import kotlin.math.max
-import kotlin.math.min
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class MainActivity : AppCompatActivity() {
-
-    private lateinit var gyroscope: Gyroscope3D
-    private var modelNode: ModelNode? = null
-    private lateinit var sceneView: SceneView
-
-    private val MIN_ROTATION_Y = -45f
-    private val MAX_ROTATION_Y = 45f
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        sceneView = findViewById(R.id.sceneView)
-
-        loadModel("tinker.glb")
-
-        gyroscope = Gyroscope3D(this) { rotationSpeed ->
-            rotateModel(rotationSpeed)
+        // 1. Botón INICIAR VISITA
+        val btnIniciar = findViewById<Button>(R.id.btnIniciar)
+        btnIniciar.setOnClickListener {
+            // En Kotlin, pasar de una pantalla a otra es así de simple:
+            val intent = Intent(this, MenuActivity::class.java)
+            startActivity(intent)
         }
-    }
 
-    private fun loadModel(fileName: String) {
-        modelNode = ModelNode(sceneView.engine).apply {
-            loadModelGlbAsync(
-                glbFileLocation = fileName,
-                autoAnimate = true,
-                scaleToUnits = 1.0f,
-                centerOrigin = Position(0f, 0f, 0f),
-                onError = { exception ->
-                    Toast.makeText(this@MainActivity, "Error al cargar modelo: ${exception.message}", Toast.LENGTH_LONG).show()
-                }
-            )
-            
-            rotation = Rotation(x = -90f, y = 0f, z = 0f)
+        // 2. Botón SONIDO
+        val btnSonido = findViewById<FloatingActionButton>(R.id.btnSonido)
+        btnSonido.setOnClickListener {
+            Toast.makeText(this, "Sonido desactivado", Toast.LENGTH_SHORT).show()
         }
-        sceneView.addChild(modelNode!!)
-    }
 
-    private fun rotateModel(speed: Float) {
-        modelNode?.let { node ->
-            val currentRotation = node.rotation
-            var newY = currentRotation.y + speed
-            newY = max(MIN_ROTATION_Y, min(newY, MAX_ROTATION_Y))
-            node.rotation = Rotation(node.rotation.x, newY, node.rotation.z)
+        // 3. Botón IDIOMA
+        val btnIdioma = findViewById<FloatingActionButton>(R.id.btnIdioma)
+        btnIdioma.setOnClickListener {
+            Toast.makeText(this, "Language changed to English", Toast.LENGTH_SHORT).show()
         }
-    }
-
-    override fun onResume() {
-        super.onResume()
-        gyroscope.start()
-    }
-
-    override fun onPause() {
-        super.onPause()
-        gyroscope.stop()
     }
 }

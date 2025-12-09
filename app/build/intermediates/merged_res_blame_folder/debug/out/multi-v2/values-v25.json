@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.museomovil.app-mergeDebugResources-51:/values-v25/values-v25.xml",
+            "outputFile": "com.example.museomovil.app-mergeDebugResources-52:/values-v25/values-v25.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\yusuf\\.gradle\\caches\\transforms-4\\b51eb6bf8630c52a5da678099c3f157e\\transformed\\appcompat-1.6.1\\res\\values-v25\\values-v25.xml",
+                    "source": "C:\\Users\\MITAR\\.gradle\\caches\\transforms-4\\b51eb6bf8630c52a5da678099c3f157e\\transformed\\appcompat-1.6.1\\res\\values-v25\\values-v25.xml",
                     "from": {
                         "startLines": "2,3,4,6",
                         "startColumns": "4,4,4,4",
