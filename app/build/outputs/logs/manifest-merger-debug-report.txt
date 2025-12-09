@@ -1,9 +1,9 @@
 -- Merging decision tree log ---
 manifest
-ADDED from C:\Users\MITAR\Documents\1. Universidad\Informatica\5 CURSO\NPI\Proyecto\MuseoMovil\app\src\main\AndroidManifest.xml:2:1-36:12
-INJECTED from C:\Users\MITAR\Documents\1. Universidad\Informatica\5 CURSO\NPI\Proyecto\MuseoMovil\app\src\main\AndroidManifest.xml:2:1-36:12
-INJECTED from C:\Users\MITAR\Documents\1. Universidad\Informatica\5 CURSO\NPI\Proyecto\MuseoMovil\app\src\main\AndroidManifest.xml:2:1-36:12
-INJECTED from C:\Users\MITAR\Documents\1. Universidad\Informatica\5 CURSO\NPI\Proyecto\MuseoMovil\app\src\main\AndroidManifest.xml:2:1-36:12
+ADDED from C:\Users\MITAR\Documents\1. Universidad\Informatica\5 CURSO\NPI\Proyecto\MuseoMovil\app\src\main\AndroidManifest.xml:2:1-38:12
+INJECTED from C:\Users\MITAR\Documents\1. Universidad\Informatica\5 CURSO\NPI\Proyecto\MuseoMovil\app\src\main\AndroidManifest.xml:2:1-38:12
+INJECTED from C:\Users\MITAR\Documents\1. Universidad\Informatica\5 CURSO\NPI\Proyecto\MuseoMovil\app\src\main\AndroidManifest.xml:2:1-38:12
+INJECTED from C:\Users\MITAR\Documents\1. Universidad\Informatica\5 CURSO\NPI\Proyecto\MuseoMovil\app\src\main\AndroidManifest.xml:2:1-38:12
 MERGED from [com.google.android.material:material:1.11.0] C:\Users\MITAR\.gradle\caches\transforms-4\d6f3ed9c21e09b5eb64230e8d93e93e9\transformed\material-1.11.0\AndroidManifest.xml:17:1-24:12
 MERGED from [io.github.sceneview:sceneview:0.10.0] C:\Users\MITAR\.gradle\caches\transforms-4\580ef26533d4c139e4d327698464e02f\transformed\jetified-sceneview-0.10.0\AndroidManifest.xml:2:1-15:12
 MERGED from [com.google.android.filament:filament-utils-android:1.36.0] C:\Users\MITAR\.gradle\caches\transforms-4\3d1858d5dbd97b3c6f50593c54a3e7c3\transformed\jetified-filament-utils-android-1.36.0\AndroidManifest.xml:17:1-22:12
@@ -89,9 +89,13 @@ ADDED from C:\Users\MITAR\Documents\1. Universidad\Informatica\5 CURSO\NPI\Proye
 		ADDED from C:\Users\MITAR\Documents\1. Universidad\Informatica\5 CURSO\NPI\Proyecto\MuseoMovil\app\src\main\AndroidManifest.xml:7:9-32
 	android:name
 		ADDED from C:\Users\MITAR\Documents\1. Universidad\Informatica\5 CURSO\NPI\Proyecto\MuseoMovil\app\src\main\AndroidManifest.xml:6:9-57
+uses-permission#android.permission.MODIFY_AUDIO_SETTINGS
+ADDED from C:\Users\MITAR\Documents\1. Universidad\Informatica\5 CURSO\NPI\Proyecto\MuseoMovil\app\src\main\AndroidManifest.xml:9:5-80
+	android:name
+		ADDED from C:\Users\MITAR\Documents\1. Universidad\Informatica\5 CURSO\NPI\Proyecto\MuseoMovil\app\src\main\AndroidManifest.xml:9:22-77
 application
-ADDED from C:\Users\MITAR\Documents\1. Universidad\Informatica\5 CURSO\NPI\Proyecto\MuseoMovil\app\src\main\AndroidManifest.xml:9:5-34:19
-INJECTED from C:\Users\MITAR\Documents\1. Universidad\Informatica\5 CURSO\NPI\Proyecto\MuseoMovil\app\src\main\AndroidManifest.xml:9:5-34:19
+ADDED from C:\Users\MITAR\Documents\1. Universidad\Informatica\5 CURSO\NPI\Proyecto\MuseoMovil\app\src\main\AndroidManifest.xml:11:5-36:19
+INJECTED from C:\Users\MITAR\Documents\1. Universidad\Informatica\5 CURSO\NPI\Proyecto\MuseoMovil\app\src\main\AndroidManifest.xml:11:5-36:19
 MERGED from [com.google.android.material:material:1.11.0] C:\Users\MITAR\.gradle\caches\transforms-4\d6f3ed9c21e09b5eb64230e8d93e93e9\transformed\material-1.11.0\AndroidManifest.xml:22:5-20
 MERGED from [com.google.android.material:material:1.11.0] C:\Users\MITAR\.gradle\caches\transforms-4\d6f3ed9c21e09b5eb64230e8d93e93e9\transformed\material-1.11.0\AndroidManifest.xml:22:5-20
 MERGED from [androidx.constraintlayout:constraintlayout:2.1.4] C:\Users\MITAR\.gradle\caches\transforms-4\5773ab5e76214bac7db400cbd0373ccd\transformed\constraintlayout-2.1.4\AndroidManifest.xml:9:5-20
@@ -117,51 +121,51 @@ MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] C:\Users\MI
 	android:appComponentFactory
 		ADDED from [androidx.core:core:1.12.0] C:\Users\MITAR\.gradle\caches\transforms-4\4d241d9967934eb7396e7225bac381c8\transformed\core-1.12.0\AndroidManifest.xml:28:18-86
 	android:supportsRtl
-		ADDED from C:\Users\MITAR\Documents\1. Universidad\Informatica\5 CURSO\NPI\Proyecto\MuseoMovil\app\src\main\AndroidManifest.xml:16:9-35
+		ADDED from C:\Users\MITAR\Documents\1. Universidad\Informatica\5 CURSO\NPI\Proyecto\MuseoMovil\app\src\main\AndroidManifest.xml:18:9-35
 	android:label
-		ADDED from C:\Users\MITAR\Documents\1. Universidad\Informatica\5 CURSO\NPI\Proyecto\MuseoMovil\app\src\main\AndroidManifest.xml:14:9-35
+		ADDED from C:\Users\MITAR\Documents\1. Universidad\Informatica\5 CURSO\NPI\Proyecto\MuseoMovil\app\src\main\AndroidManifest.xml:16:9-35
 	android:fullBackupContent
-		ADDED from C:\Users\MITAR\Documents\1. Universidad\Informatica\5 CURSO\NPI\Proyecto\MuseoMovil\app\src\main\AndroidManifest.xml:12:9-54
+		ADDED from C:\Users\MITAR\Documents\1. Universidad\Informatica\5 CURSO\NPI\Proyecto\MuseoMovil\app\src\main\AndroidManifest.xml:14:9-54
 	android:roundIcon
-		ADDED from C:\Users\MITAR\Documents\1. Universidad\Informatica\5 CURSO\NPI\Proyecto\MuseoMovil\app\src\main\AndroidManifest.xml:15:9-54
+		ADDED from C:\Users\MITAR\Documents\1. Universidad\Informatica\5 CURSO\NPI\Proyecto\MuseoMovil\app\src\main\AndroidManifest.xml:17:9-54
 	tools:targetApi
-		ADDED from C:\Users\MITAR\Documents\1. Universidad\Informatica\5 CURSO\NPI\Proyecto\MuseoMovil\app\src\main\AndroidManifest.xml:18:9-29
+		ADDED from C:\Users\MITAR\Documents\1. Universidad\Informatica\5 CURSO\NPI\Proyecto\MuseoMovil\app\src\main\AndroidManifest.xml:20:9-29
 	android:icon
-		ADDED from C:\Users\MITAR\Documents\1. Universidad\Informatica\5 CURSO\NPI\Proyecto\MuseoMovil\app\src\main\AndroidManifest.xml:13:9-43
+		ADDED from C:\Users\MITAR\Documents\1. Universidad\Informatica\5 CURSO\NPI\Proyecto\MuseoMovil\app\src\main\AndroidManifest.xml:15:9-43
 	android:allowBackup
-		ADDED from C:\Users\MITAR\Documents\1. Universidad\Informatica\5 CURSO\NPI\Proyecto\MuseoMovil\app\src\main\AndroidManifest.xml:10:9-35
+		ADDED from C:\Users\MITAR\Documents\1. Universidad\Informatica\5 CURSO\NPI\Proyecto\MuseoMovil\app\src\main\AndroidManifest.xml:12:9-35
 	android:theme
-		ADDED from C:\Users\MITAR\Documents\1. Universidad\Informatica\5 CURSO\NPI\Proyecto\MuseoMovil\app\src\main\AndroidManifest.xml:17:9-48
+		ADDED from C:\Users\MITAR\Documents\1. Universidad\Informatica\5 CURSO\NPI\Proyecto\MuseoMovil\app\src\main\AndroidManifest.xml:19:9-48
 	android:dataExtractionRules
-		ADDED from C:\Users\MITAR\Documents\1. Universidad\Informatica\5 CURSO\NPI\Proyecto\MuseoMovil\app\src\main\AndroidManifest.xml:11:9-65
+		ADDED from C:\Users\MITAR\Documents\1. Universidad\Informatica\5 CURSO\NPI\Proyecto\MuseoMovil\app\src\main\AndroidManifest.xml:13:9-65
 activity#com.example.museomovil.MenuActivity
-ADDED from C:\Users\MITAR\Documents\1. Universidad\Informatica\5 CURSO\NPI\Proyecto\MuseoMovil\app\src\main\AndroidManifest.xml:19:9-21:40
+ADDED from C:\Users\MITAR\Documents\1. Universidad\Informatica\5 CURSO\NPI\Proyecto\MuseoMovil\app\src\main\AndroidManifest.xml:21:9-23:40
 	android:exported
-		ADDED from C:\Users\MITAR\Documents\1. Universidad\Informatica\5 CURSO\NPI\Proyecto\MuseoMovil\app\src\main\AndroidManifest.xml:21:13-37
+		ADDED from C:\Users\MITAR\Documents\1. Universidad\Informatica\5 CURSO\NPI\Proyecto\MuseoMovil\app\src\main\AndroidManifest.xml:23:13-37
 	android:name
-		ADDED from C:\Users\MITAR\Documents\1. Universidad\Informatica\5 CURSO\NPI\Proyecto\MuseoMovil\app\src\main\AndroidManifest.xml:20:13-41
+		ADDED from C:\Users\MITAR\Documents\1. Universidad\Informatica\5 CURSO\NPI\Proyecto\MuseoMovil\app\src\main\AndroidManifest.xml:22:13-41
 activity#com.example.museomovil.Vista3DActivity
-ADDED from C:\Users\MITAR\Documents\1. Universidad\Informatica\5 CURSO\NPI\Proyecto\MuseoMovil\app\src\main\AndroidManifest.xml:22:9-24:40
+ADDED from C:\Users\MITAR\Documents\1. Universidad\Informatica\5 CURSO\NPI\Proyecto\MuseoMovil\app\src\main\AndroidManifest.xml:24:9-26:40
 	android:exported
-		ADDED from C:\Users\MITAR\Documents\1. Universidad\Informatica\5 CURSO\NPI\Proyecto\MuseoMovil\app\src\main\AndroidManifest.xml:24:13-37
+		ADDED from C:\Users\MITAR\Documents\1. Universidad\Informatica\5 CURSO\NPI\Proyecto\MuseoMovil\app\src\main\AndroidManifest.xml:26:13-37
 	android:name
-		ADDED from C:\Users\MITAR\Documents\1. Universidad\Informatica\5 CURSO\NPI\Proyecto\MuseoMovil\app\src\main\AndroidManifest.xml:23:13-44
+		ADDED from C:\Users\MITAR\Documents\1. Universidad\Informatica\5 CURSO\NPI\Proyecto\MuseoMovil\app\src\main\AndroidManifest.xml:25:13-44
 activity#com.example.museomovil.MainActivity
-ADDED from C:\Users\MITAR\Documents\1. Universidad\Informatica\5 CURSO\NPI\Proyecto\MuseoMovil\app\src\main\AndroidManifest.xml:25:9-33:20
+ADDED from C:\Users\MITAR\Documents\1. Universidad\Informatica\5 CURSO\NPI\Proyecto\MuseoMovil\app\src\main\AndroidManifest.xml:27:9-35:20
 	android:exported
-		ADDED from C:\Users\MITAR\Documents\1. Universidad\Informatica\5 CURSO\NPI\Proyecto\MuseoMovil\app\src\main\AndroidManifest.xml:27:13-36
+		ADDED from C:\Users\MITAR\Documents\1. Universidad\Informatica\5 CURSO\NPI\Proyecto\MuseoMovil\app\src\main\AndroidManifest.xml:29:13-36
 	android:name
-		ADDED from C:\Users\MITAR\Documents\1. Universidad\Informatica\5 CURSO\NPI\Proyecto\MuseoMovil\app\src\main\AndroidManifest.xml:26:13-41
+		ADDED from C:\Users\MITAR\Documents\1. Universidad\Informatica\5 CURSO\NPI\Proyecto\MuseoMovil\app\src\main\AndroidManifest.xml:28:13-41
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
-ADDED from C:\Users\MITAR\Documents\1. Universidad\Informatica\5 CURSO\NPI\Proyecto\MuseoMovil\app\src\main\AndroidManifest.xml:28:13-32:29
+ADDED from C:\Users\MITAR\Documents\1. Universidad\Informatica\5 CURSO\NPI\Proyecto\MuseoMovil\app\src\main\AndroidManifest.xml:30:13-34:29
 action#android.intent.action.MAIN
-ADDED from C:\Users\MITAR\Documents\1. Universidad\Informatica\5 CURSO\NPI\Proyecto\MuseoMovil\app\src\main\AndroidManifest.xml:29:17-69
+ADDED from C:\Users\MITAR\Documents\1. Universidad\Informatica\5 CURSO\NPI\Proyecto\MuseoMovil\app\src\main\AndroidManifest.xml:31:17-69
 	android:name
-		ADDED from C:\Users\MITAR\Documents\1. Universidad\Informatica\5 CURSO\NPI\Proyecto\MuseoMovil\app\src\main\AndroidManifest.xml:29:25-66
+		ADDED from C:\Users\MITAR\Documents\1. Universidad\Informatica\5 CURSO\NPI\Proyecto\MuseoMovil\app\src\main\AndroidManifest.xml:31:25-66
 category#android.intent.category.LAUNCHER
-ADDED from C:\Users\MITAR\Documents\1. Universidad\Informatica\5 CURSO\NPI\Proyecto\MuseoMovil\app\src\main\AndroidManifest.xml:31:17-77
+ADDED from C:\Users\MITAR\Documents\1. Universidad\Informatica\5 CURSO\NPI\Proyecto\MuseoMovil\app\src\main\AndroidManifest.xml:33:17-77
 	android:name
-		ADDED from C:\Users\MITAR\Documents\1. Universidad\Informatica\5 CURSO\NPI\Proyecto\MuseoMovil\app\src\main\AndroidManifest.xml:31:27-74
+		ADDED from C:\Users\MITAR\Documents\1. Universidad\Informatica\5 CURSO\NPI\Proyecto\MuseoMovil\app\src\main\AndroidManifest.xml:33:27-74
 uses-sdk
 INJECTED from C:\Users\MITAR\Documents\1. Universidad\Informatica\5 CURSO\NPI\Proyecto\MuseoMovil\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from C:\Users\MITAR\Documents\1. Universidad\Informatica\5 CURSO\NPI\Proyecto\MuseoMovil\app\src\main\AndroidManifest.xml

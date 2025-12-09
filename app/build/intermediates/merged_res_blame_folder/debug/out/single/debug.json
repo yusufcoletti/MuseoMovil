@@ -1,5 +1,81 @@
 [
     {
+        "merged": "com.example.museomovil.app-merged_res-54:/drawable_ic_launcher_foreground.xml.flat",
+        "source": "com.example.museomovil.app-main-56:/drawable/ic_launcher_foreground.xml"
+    },
+    {
+        "merged": "com.example.museomovil.app-merged_res-54:/mipmap-mdpi_ic_launcher.webp.flat",
+        "source": "com.example.museomovil.app-main-56:/mipmap-mdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "com.example.museomovil.app-merged_res-54:/mipmap-xhdpi_ic_launcher.webp.flat",
+        "source": "com.example.museomovil.app-main-56:/mipmap-xhdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "C:\\Users\\MITAR\\.gradle\\daemon\\8.7\\com.example.museomovil.app-merged_res-54:\\mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "C:\\Users\\MITAR\\.gradle\\daemon\\8.7\\com.example.museomovil.app-main-56:\\mipmap-anydpi-v26\\ic_launcher.xml"
+    },
+    {
+        "merged": "com.example.museomovil.app-merged_res-54:/mipmap-xhdpi_ic_launcher_round.webp.flat",
+        "source": "com.example.museomovil.app-main-56:/mipmap-xhdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "C:\\Users\\MITAR\\.gradle\\daemon\\8.7\\com.example.museomovil.app-merged_res-54:\\drawable_ic_language.xml.flat",
+        "source": "C:\\Users\\MITAR\\.gradle\\daemon\\8.7\\com.example.museomovil.app-main-56:\\drawable\\ic_language.xml"
+    },
+    {
+        "merged": "C:\\Users\\MITAR\\.gradle\\daemon\\8.7\\com.example.museomovil.app-merged_res-54:\\drawable_ic_art_digital.xml.flat",
+        "source": "C:\\Users\\MITAR\\.gradle\\daemon\\8.7\\com.example.museomovil.app-main-56:\\drawable\\ic_art_digital.xml"
+    },
+    {
+        "merged": "com.example.museomovil.app-merged_res-54:/mipmap-xxhdpi_ic_launcher.webp.flat",
+        "source": "com.example.museomovil.app-main-56:/mipmap-xxhdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "C:\\Users\\MITAR\\.gradle\\daemon\\8.7\\com.example.museomovil.app-merged_res-54:\\drawable_ic_nfc.xml.flat",
+        "source": "C:\\Users\\MITAR\\.gradle\\daemon\\8.7\\com.example.museomovil.app-main-56:\\drawable\\ic_nfc.xml"
+    },
+    {
+        "merged": "com.example.museomovil.app-merged_res-54:/mipmap-hdpi_ic_launcher.webp.flat",
+        "source": "com.example.museomovil.app-main-56:/mipmap-hdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "com.example.museomovil.app-merged_res-54:/mipmap-xxxhdpi_ic_launcher.webp.flat",
+        "source": "com.example.museomovil.app-main-56:/mipmap-xxxhdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "C:\\Users\\MITAR\\.gradle\\daemon\\8.7\\com.example.museomovil.app-merged_res-54:\\xml_backup_rules.xml.flat",
+        "source": "C:\\Users\\MITAR\\.gradle\\daemon\\8.7\\com.example.museomovil.app-main-56:\\xml\\backup_rules.xml"
+    },
+    {
+        "merged": "C:\\Users\\MITAR\\.gradle\\daemon\\8.7\\com.example.museomovil.app-merged_res-54:\\drawable_bg_gradient.xml.flat",
+        "source": "C:\\Users\\MITAR\\.gradle\\daemon\\8.7\\com.example.museomovil.app-main-56:\\drawable\\bg_gradient.xml"
+    },
+    {
+        "merged": "C:\\Users\\MITAR\\.gradle\\daemon\\8.7\\com.example.museomovil.app-merged_res-54:\\mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "C:\\Users\\MITAR\\.gradle\\daemon\\8.7\\com.example.museomovil.app-main-56:\\mipmap-anydpi-v26\\ic_launcher_round.xml"
+    },
+    {
+        "merged": "C:\\Users\\MITAR\\.gradle\\daemon\\8.7\\com.example.museomovil.app-merged_res-54:\\drawable_white_circle_bg.xml.flat",
+        "source": "C:\\Users\\MITAR\\.gradle\\daemon\\8.7\\com.example.museomovil.app-main-56:\\drawable\\white_circle_bg.xml"
+    },
+    {
+        "merged": "C:\\Users\\MITAR\\.gradle\\daemon\\8.7\\com.example.museomovil.app-merged_res-54:\\layout_activity_menu.xml.flat",
+        "source": "C:\\Users\\MITAR\\.gradle\\daemon\\8.7\\com.example.museomovil.app-main-56:\\layout\\activity_menu.xml"
+    },
+    {
+        "merged": "C:\\Users\\MITAR\\.gradle\\daemon\\8.7\\com.example.museomovil.app-merged_res-54:\\raw_avion_animacion.json.flat",
+        "source": "C:\\Users\\MITAR\\.gradle\\daemon\\8.7\\com.example.museomovil.app-main-56:\\raw\\avion_animacion.json"
+    },
+    {
+        "merged": "C:\\Users\\MITAR\\.gradle\\daemon\\8.7\\com.example.museomovil.app-merged_res-54:\\drawable_ic_volume_on.xml.flat",
+        "source": "C:\\Users\\MITAR\\.gradle\\daemon\\8.7\\com.example.museomovil.app-main-56:\\drawable\\ic_volume_on.xml"
+    },
+    {
+        "merged": "com.example.museomovil.app-merged_res-54:/mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "com.example.museomovil.app-main-56:/mipmap-anydpi-v26/ic_launcher_round.xml"
+    },
+    {
         "merged": "C:\\Users\\MITAR\\.gradle\\daemon\\8.7\\com.example.museomovil.app-merged_res-54:\\xml_data_extraction_rules.xml.flat",
         "source": "C:\\Users\\MITAR\\.gradle\\daemon\\8.7\\com.example.museomovil.app-main-56:\\xml\\data_extraction_rules.xml"
     },
@@ -12,8 +88,16 @@
         "source": "C:\\Users\\MITAR\\.gradle\\daemon\\8.7\\com.example.museomovil.app-main-56:\\layout\\activity_vista3_d.xml"
     },
     {
-        "merged": "C:\\Users\\MITAR\\.gradle\\daemon\\8.7\\com.example.museomovil.app-merged_res-54:\\mipmap-anydpi-v26_ic_launcher.xml.flat",
-        "source": "C:\\Users\\MITAR\\.gradle\\daemon\\8.7\\com.example.museomovil.app-main-56:\\mipmap-anydpi-v26\\ic_launcher.xml"
+        "merged": "com.example.museomovil.app-merged_res-54:/mipmap-mdpi_ic_launcher_round.webp.flat",
+        "source": "com.example.museomovil.app-main-56:/mipmap-mdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "com.example.museomovil.app-merged_res-54:/mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "com.example.museomovil.app-main-56:/mipmap-anydpi-v26/ic_launcher.xml"
+    },
+    {
+        "merged": "com.example.museomovil.app-merged_res-54:/mipmap-hdpi_ic_launcher_round.webp.flat",
+        "source": "com.example.museomovil.app-main-56:/mipmap-hdpi/ic_launcher_round.webp"
     },
     {
         "merged": "C:\\Users\\MITAR\\.gradle\\daemon\\8.7\\com.example.museomovil.app-merged_res-54:\\drawable_sky_background.xml.flat",
@@ -24,18 +108,6 @@
         "source": "C:\\Users\\MITAR\\.gradle\\daemon\\8.7\\com.example.museomovil.app-main-56:\\drawable\\ic_volume_off.xml"
     },
     {
-        "merged": "com.example.museomovil.app-merged_res-54:/layout_activity_main.xml.flat",
-        "source": "com.example.museomovil.app-main-56:/layout/activity_main.xml"
-    },
-    {
-        "merged": "C:\\Users\\MITAR\\.gradle\\daemon\\8.7\\com.example.museomovil.app-merged_res-54:\\drawable_ic_language.xml.flat",
-        "source": "C:\\Users\\MITAR\\.gradle\\daemon\\8.7\\com.example.museomovil.app-main-56:\\drawable\\ic_language.xml"
-    },
-    {
-        "merged": "C:\\Users\\MITAR\\.gradle\\daemon\\8.7\\com.example.museomovil.app-merged_res-54:\\drawable_ic_art_digital.xml.flat",
-        "source": "C:\\Users\\MITAR\\.gradle\\daemon\\8.7\\com.example.museomovil.app-main-56:\\drawable\\ic_art_digital.xml"
-    },
-    {
         "merged": "C:\\Users\\MITAR\\.gradle\\daemon\\8.7\\com.example.museomovil.app-merged_res-54:\\layout_activity_main.xml.flat",
         "source": "C:\\Users\\MITAR\\.gradle\\daemon\\8.7\\com.example.museomovil.app-main-56:\\layout\\activity_main.xml"
     },
@@ -44,32 +116,12 @@
         "source": "C:\\Users\\MITAR\\.gradle\\daemon\\8.7\\com.example.museomovil.app-main-56:\\drawable\\ic_catalog.xml"
     },
     {
-        "merged": "com.example.museomovil.app-merged_res-54:/drawable_ic_nfc.xml.flat",
-        "source": "com.example.museomovil.app-main-56:/drawable/ic_nfc.xml"
+        "merged": "com.example.museomovil.app-merged_res-54:/mipmap-xxhdpi_ic_launcher_round.webp.flat",
+        "source": "com.example.museomovil.app-main-56:/mipmap-xxhdpi/ic_launcher_round.webp"
     },
     {
-        "merged": "C:\\Users\\MITAR\\.gradle\\daemon\\8.7\\com.example.museomovil.app-merged_res-54:\\xml_backup_rules.xml.flat",
-        "source": "C:\\Users\\MITAR\\.gradle\\daemon\\8.7\\com.example.museomovil.app-main-56:\\xml\\backup_rules.xml"
-    },
-    {
-        "merged": "C:\\Users\\MITAR\\.gradle\\daemon\\8.7\\com.example.museomovil.app-merged_res-54:\\mipmap-anydpi-v26_ic_launcher_round.xml.flat",
-        "source": "C:\\Users\\MITAR\\.gradle\\daemon\\8.7\\com.example.museomovil.app-main-56:\\mipmap-anydpi-v26\\ic_launcher_round.xml"
-    },
-    {
-        "merged": "C:\\Users\\MITAR\\.gradle\\daemon\\8.7\\com.example.museomovil.app-merged_res-54:\\layout_activity_menu.xml.flat",
-        "source": "C:\\Users\\MITAR\\.gradle\\daemon\\8.7\\com.example.museomovil.app-main-56:\\layout\\activity_menu.xml"
-    },
-    {
-        "merged": "com.example.museomovil.app-merged_res-54:/layout_activity_menu.xml.flat",
-        "source": "com.example.museomovil.app-main-56:/layout/activity_menu.xml"
-    },
-    {
-        "merged": "com.example.museomovil.app-merged_res-54:/drawable_bg_gradient.xml.flat",
-        "source": "com.example.museomovil.app-main-56:/drawable/bg_gradient.xml"
-    },
-    {
-        "merged": "C:\\Users\\MITAR\\.gradle\\daemon\\8.7\\com.example.museomovil.app-merged_res-54:\\raw_avion_animacion.json.flat",
-        "source": "C:\\Users\\MITAR\\.gradle\\daemon\\8.7\\com.example.museomovil.app-main-56:\\raw\\avion_animacion.json"
+        "merged": "com.example.museomovil.app-merged_res-54:/mipmap-xxxhdpi_ic_launcher_round.webp.flat",
+        "source": "com.example.museomovil.app-main-56:/mipmap-xxxhdpi/ic_launcher_round.webp"
     },
     {
         "merged": "C:\\Users\\MITAR\\.gradle\\daemon\\8.7\\com.example.museomovil.app-merged_res-54:\\drawable_ic_view_3d.xml.flat",

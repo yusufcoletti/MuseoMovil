@@ -6,6 +6,7 @@
     <color name="aviation_silver">#E0E1DD</color>
     <color name="aviation_sky">#415A77</color>
     <color name="black">#FF000000</color>
+    <color name="ic_launcher_background">#415A77</color>
     <color name="purple_200">#FFBB86FC</color>
     <color name="purple_500">#FF6200EE</color>
     <color name="purple_700">#FF3700B3</color>

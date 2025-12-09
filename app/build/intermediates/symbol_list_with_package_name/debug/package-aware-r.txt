@@ -1442,6 +1442,7 @@ color foreground_material_dark
 color foreground_material_light
 color highlighted_text_material_dark
 color highlighted_text_material_light
+color ic_launcher_background
 color m3_appbar_overlay_color
 color m3_assist_chip_icon_tint_color
 color m3_assist_chip_stroke_color
@@ -3029,6 +3030,7 @@ drawable ic_clear_black_24
 drawable ic_clock_black_24dp
 drawable ic_keyboard_black_24dp
 drawable ic_language
+drawable ic_launcher_foreground
 drawable ic_m3_chip_check
 drawable ic_m3_chip_checked_circle
 drawable ic_m3_chip_close
@@ -3041,6 +3043,7 @@ drawable ic_nfc
 drawable ic_search_black_24
 drawable ic_view_3d
 drawable ic_volume_off
+drawable ic_volume_on
 drawable m3_avd_hide_password
 drawable m3_avd_show_password
 drawable m3_bottom_sheet_drag_handle
@@ -3118,6 +3121,7 @@ drawable sky_background
 drawable test_level_drawable
 drawable tooltip_frame_dark
 drawable tooltip_frame_light
+drawable white_circle_bg
 id ALT
 id BOTTOM_END
 id BOTTOM_START
@@ -3220,8 +3224,10 @@ id bounceBoth
 id bounceEnd
 id bounceStart
 id btnIdioma
+id btnIdiomaMenu
 id btnIniciar
 id btnSonido
+id btnSonidoMenu
 id buttonPanel
 id cache_measures
 id callMeasure
@@ -3336,6 +3342,7 @@ id group_divider
 id grouping
 id groups
 id hardware
+id headerLayout
 id header_title
 id hide_ime_id
 id hide_in_inspector_tag
