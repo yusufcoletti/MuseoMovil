@@ -1,172 +1,194 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background_light"
-    android:padding="16dp">
+    android:orientation="vertical"
+    android:background="@color/aviation_silver"> <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/aviation_navy"
+    android:padding="20dp"
+    android:elevation="4dp"
+    android:gravity="center_vertical">
 
-    <LinearLayout
+    <TextView
+        android:text="PANEL DE CONTROL"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:letterSpacing="0.05"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+</LinearLayout>
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-        <TextView
-            android:text="Explorar Museo"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            android:textColor="@color/primary_museum"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="24dp"
-            android:layout_gravity="center_horizontal"/>
-
-        <GridLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:columnCount="2"
-            android:rowCount="3"
-            android:alignmentMode="alignMargins"
-            android:columnOrderPreserved="false">
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <GridLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:columnCount="2"
+                android:rowCount="2"
+                android:alignmentMode="alignMargins"
+                android:columnOrderPreserved="false">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="0dp"
+                    android:layout_height="130dp"
+                    android:layout_columnWeight="1"
+                    android:layout_margin="8dp"
+                    app:cardCornerRadius="8dp"
+                    app:cardElevation="2dp"
+                    app:cardBackgroundColor="@color/white">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:orientation="vertical">
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:src="@drawable/ic_catalog"
+                            app:tint="@color/aviation_navy"/>
+                        <TextView
+                            android:text="CATÁLOGO"
+                            android:textColor="@color/aviation_blue"
+                            android:textSize="12sp"
+                            android:textStyle="bold"
+                            android:layout_marginTop="8dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardVista3D"
+                    android:layout_width="0dp"
+                    android:layout_height="130dp"
+                    android:layout_columnWeight="1"
+                    android:layout_margin="8dp"
+                    app:cardCornerRadius="8dp"
+                    app:cardElevation="2dp"
+                    app:cardBackgroundColor="@color/white">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:orientation="vertical">
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:src="@drawable/ic_view_3d"
+                            app:tint="@color/aviation_navy"/>
+                        <TextView
+                            android:text="VISTAS 3D"
+                            android:textColor="@color/aviation_blue"
+                            android:textSize="12sp"
+                            android:textStyle="bold"
+                            android:layout_marginTop="8dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="0dp"
+                    android:layout_height="130dp"
+                    android:layout_columnWeight="1"
+                    android:layout_margin="8dp"
+                    app:cardCornerRadius="8dp"
+                    app:cardElevation="2dp"
+                    app:cardBackgroundColor="@color/white">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:orientation="vertical">
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:src="@drawable/ic_map"
+                            app:tint="@color/aviation_navy"/>
+                        <TextView
+                            android:text="MAPA MUSEO"
+                            android:textColor="@color/aviation_blue"
+                            android:textSize="12sp"
+                            android:textStyle="bold"
+                            android:layout_marginTop="8dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardNFC"
+                    android:layout_width="0dp"
+                    android:layout_height="130dp"
+                    android:layout_columnWeight="1"
+                    android:layout_margin="8dp"
+                    app:cardCornerRadius="8dp"
+                    app:cardElevation="2dp"
+                    app:cardBackgroundColor="@color/white">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:orientation="vertical">
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:src="@drawable/ic_nfc"
+                            app:tint="@color/accent_gold"/>
+                        <TextView
+                            android:text="ESCANEAR NFC"
+                            android:textColor="@color/aviation_navy"
+                            android:textSize="12sp"
+                            android:textStyle="bold"
+                            android:layout_marginTop="8dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+            </GridLayout>
 
             <androidx.cardview.widget.CardView
-                android:layout_width="0dp"
-                android:layout_height="140dp"
-                android:layout_columnWeight="1"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
                 android:layout_margin="8dp"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="4dp">
+                app:cardCornerRadius="8dp"
+                app:cardElevation="4dp"
+                app:cardBackgroundColor="@color/aviation_blue">
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center"
-                    android:orientation="vertical"
-                    android:background="@color/white">
+                    android:orientation="horizontal">
                     <ImageView
-                        android:layout_width="48dp"
-                        android:layout_height="48dp"
-                        android:src="@drawable/ic_catalog"
-                        app:tint="@color/primary_museum"/>
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:src="@drawable/ic_art_digital"
+                        app:tint="@color/white"/>
                     <TextView
-                        android:text="CATÁLOGO"
-                        android:textStyle="bold"
-                        android:layout_marginTop="8dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/cardVista3D"
-                android:layout_width="0dp"
-                android:layout_height="140dp"
-                android:layout_columnWeight="1"
-                android:layout_margin="8dp"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="4dp">
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:orientation="vertical"
-                    android:background="@color/white">
-                    <ImageView
-                        android:layout_width="48dp"
-                        android:layout_height="48dp"
-                        android:src="@drawable/ic_view_3d"
-                        app:tint="@color/primary_museum"/>
-                    <TextView
-                        android:text="VISTAS 3D"
-                        android:textStyle="bold"
-                        android:layout_marginTop="8dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
-
-            <androidx.cardview.widget.CardView
-                android:layout_width="0dp"
-                android:layout_height="140dp"
-                android:layout_columnWeight="1"
-                android:layout_margin="8dp"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="4dp">
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:orientation="vertical"
-                    android:background="@color/white">
-                    <ImageView
-                        android:layout_width="48dp"
-                        android:layout_height="48dp"
-                        android:src="@drawable/ic_map"
-                        app:tint="@color/primary_museum"/>
-                    <TextView
-                        android:text="MAPA OBRAS"
-                        android:textStyle="bold"
-                        android:layout_marginTop="8dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
-
-            <androidx.cardview.widget.CardView
-                android:layout_width="0dp"
-                android:layout_height="140dp"
-                android:layout_columnWeight="1"
-                android:layout_margin="8dp"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="4dp">
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:orientation="vertical"
-                    android:background="@color/white">
-                    <ImageView
-                        android:layout_width="48dp"
-                        android:layout_height="48dp"
-                        android:src="@drawable/ic_map"
-                        app:tint="@color/primary_museum"/>
-                    <TextView
-                        android:text="SERVICIOS"
-                        android:textStyle="bold"
-                        android:layout_marginTop="8dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
-
-            <androidx.cardview.widget.CardView
-                android:layout_width="0dp"
-                android:layout_height="140dp"
-                android:layout_columnSpan="2"
-                android:layout_columnWeight="1"
-                android:layout_margin="8dp"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="4dp">
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:orientation="horizontal"
-                    android:background="@color/accent_museum"> <ImageView
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
-                    android:src="@drawable/ic_art_digital"
-                    app:tint="@color/white"/>
-                    <TextView
-                        android:text=" ARTE DIGITAL"
-                        android:textSize="18sp"
+                        android:text="ARTE DIGITAL Y EXHIBICIONES"
                         android:textColor="@color/white"
+                        android:textSize="16sp"
                         android:textStyle="bold"
-                        android:layout_marginLeft="10dp"
+                        android:letterSpacing="0.05"
+                        android:layout_marginLeft="16dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"/>
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
-        </GridLayout>
-    </LinearLayout>
-</ScrollView>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

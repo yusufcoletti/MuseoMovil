@@ -1365,14 +1365,17 @@ int color abc_tint_edittext 0x7f050015
 int color abc_tint_seek_thumb 0x7f050016
 int color abc_tint_spinner 0x7f050017
 int color abc_tint_switch_track 0x7f050018
+int color accent_gold 0x7f05030f
 int color accent_material_dark 0x7f050019
 int color accent_material_light 0x7f05001a
-int color accent_museum 0x7f05001b
 int color androidx_core_ripple_material_light 0x7f05001c
 int color androidx_core_secondary_text_default_material_light 0x7f05001d
+int color aviation_blue 0x7f050310
+int color aviation_navy 0x7f050311
+int color aviation_silver 0x7f050312
+int color aviation_sky 0x7f050313
 int color background_floating_material_dark 0x7f05001e
 int color background_floating_material_light 0x7f05001f
-int color background_light 0x7f050020
 int color background_material_dark 0x7f050021
 int color background_material_light 0x7f050022
 int color black 0x7f050023
@@ -2095,7 +2098,6 @@ int color primary_dark_material_dark 0x7f0502ef
 int color primary_dark_material_light 0x7f0502f0
 int color primary_material_dark 0x7f0502f1
 int color primary_material_light 0x7f0502f2
-int color primary_museum 0x7f0502f3
 int color primary_text_default_material_dark 0x7f0502f4
 int color primary_text_default_material_light 0x7f0502f5
 int color primary_text_disabled_material_dark 0x7f0502f6
@@ -2117,7 +2119,6 @@ int color switch_thumb_normal_material_dark 0x7f050305
 int color switch_thumb_normal_material_light 0x7f050306
 int color teal_200 0x7f050307
 int color teal_700 0x7f050308
-int color text_dark 0x7f050309
 int color tooltip_background_dark 0x7f05030a
 int color tooltip_background_light 0x7f05030b
 int color vector_tint_color 0x7f05030c
@@ -3000,6 +3001,7 @@ int drawable abc_textfield_search_material 0x7f070075
 int drawable abc_vector_test 0x7f070076
 int drawable avd_hide_password 0x7f070077
 int drawable avd_show_password 0x7f070078
+int drawable bg_gradient 0x7f0700eb
 int drawable btn_checkbox_checked_mtrl 0x7f070079
 int drawable btn_checkbox_checked_to_unchecked_mtrl_animation 0x7f07007a
 int drawable btn_checkbox_unchecked_mtrl 0x7f07007b
@@ -3034,6 +3036,7 @@ int drawable ic_mtrl_checked_circle 0x7f070097
 int drawable ic_mtrl_chip_checked_black 0x7f070098
 int drawable ic_mtrl_chip_checked_circle 0x7f070099
 int drawable ic_mtrl_chip_close_circle 0x7f07009a
+int drawable ic_nfc 0x7f0700ec
 int drawable ic_search_black_24 0x7f07009b
 int drawable ic_view_3d 0x7f07009c
 int drawable ic_volume_off 0x7f07009d
@@ -3222,6 +3225,7 @@ int id buttonPanel 0x7f080068
 int id cache_measures 0x7f080069
 int id callMeasure 0x7f08006a
 int id cancel_button 0x7f08006b
+int id cardNFC 0x7f080205
 int id cardVista3D 0x7f08006c
 int id carryVelocity 0x7f08006d
 int id center 0x7f08006e
@@ -3582,6 +3586,7 @@ int id textSpacerNoButtons 0x7f0801d0
 int id textSpacerNoTitle 0x7f0801d1
 int id textStart 0x7f0801d2
 int id textTop 0x7f0801d3
+int id textViewTitulo 0x7f080206
 int id text_input_end_icon 0x7f0801d4
 int id text_input_error_icon 0x7f0801d5
 int id text_input_start_icon 0x7f0801d6

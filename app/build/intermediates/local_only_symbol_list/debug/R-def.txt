@@ -1,20 +1,23 @@
 R_DEF: Internal format may change without notice
 local
-color accent_museum
-color background_light
+color accent_gold
+color aviation_blue
+color aviation_navy
+color aviation_silver
+color aviation_sky
 color black
-color primary_museum
 color purple_200
 color purple_500
 color purple_700
 color teal_200
 color teal_700
-color text_dark
 color white
+drawable bg_gradient
 drawable ic_art_digital
 drawable ic_catalog
 drawable ic_language
 drawable ic_map
+drawable ic_nfc
 drawable ic_view_3d
 drawable ic_volume_off
 drawable sky_background
@@ -22,9 +25,11 @@ id animationView
 id btnIdioma
 id btnIniciar
 id btnSonido
+id cardNFC
 id cardVista3D
 id instructionText
 id sceneView
+id textViewTitulo
 layout activity_main
 layout activity_menu
 layout activity_vista3_d
