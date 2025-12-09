@@ -8,8 +8,9 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
-    <color name="primary_museum">#1A237E</color>
-    <color name="accent_museum">#FF4081</color>
-    <color name="background_light">#F5F5F5</color>
-    <color name="text_dark">#212121</color>
+    <color name="aviation_navy">#0D1B2A</color>
+    <color name="aviation_blue">#1B263B</color>
+    <color name="aviation_sky">#415A77</color>
+    <color name="aviation_silver">#E0E1DD</color>
+    <color name="accent_gold">#C5A059</color>
 </resources>
