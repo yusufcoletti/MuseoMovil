@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_bottom_sheet"
+    android:orientation="vertical"
+    android:padding="24dp">
+
+    <View
+        android:layout_width="40dp"
+        android:layout_height="4dp"
+        android:layout_gravity="center"
+        android:background="#E0E0E0"
+        android:layout_marginBottom="16dp"/>
+
+    <TextView
+        android:id="@+id/sheetTitulo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Nombre del Avión"
+        android:textColor="@color/aviation_navy"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp">
+
+        <TextView
+            android:id="@+id/sheetDescripcion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Aquí va la descripción..."
+            android:lineSpacingExtra="4dp"
+            android:textColor="#555555"
+            android:textSize="16sp" />
+    </ScrollView>
+
+    <Button
+        android:id="@+id/btnVerMasDetalles"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="VER MÁS DETALLES"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:backgroundTint="@color/aviation_navy" />
+
+</LinearLayout>

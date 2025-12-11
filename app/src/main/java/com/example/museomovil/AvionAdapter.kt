@@ -56,8 +56,32 @@ class AvionAdapter(private val listaAviones: List<Avion>, private val context: C
                 context.startActivity(intent)
             }
 
+            // Acción del botón INFO -> Abrir Bottom Sheet
             holder.btnInfo.setOnClickListener {
-                Toast.makeText(context, "Info: ${avion.descripcion}", Toast.LENGTH_SHORT).show()
+                // 1. Crear el diálogo
+                val dialog = com.google.android.material.bottomsheet.BottomSheetDialog(context)
+                val view = LayoutInflater.from(context).inflate(R.layout.layout_bottom_sheet, null)
+                dialog.setContentView(view)
+
+                // 2. Conectar los elementos del diseño
+                val txtTitulo = view.findViewById<TextView>(R.id.sheetTitulo)
+                val txtDesc = view.findViewById<TextView>(R.id.sheetDescripcion)
+                val btnVerMas = view.findViewById<Button>(R.id.btnVerMasDetalles)
+
+                // 3. Poner la información BREVE inicialmente
+                txtTitulo.text = avion.nombre
+                txtDesc.text = avion.descripcion
+
+                // 4. Lógica del botón "VER MÁS DETALLES"
+                btnVerMas.setOnClickListener {
+                    // Al pulsar, cambiamos el texto por la versión LARGA
+                    txtDesc.text = avion.descripcionDetallada
+                    // Y ocultamos el botón porque ya no hace falta
+                    btnVerMas.visibility = View.GONE
+                }
+
+                // 5. Mostrar la pestaña
+                dialog.show()
             }
 
         } else {
