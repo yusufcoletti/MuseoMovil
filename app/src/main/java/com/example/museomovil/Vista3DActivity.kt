@@ -30,6 +30,12 @@ class Vista3DActivity : AppCompatActivity() {
         gyroscope = Gyroscope3D(this) { rotationSpeed ->
             rotateModel(rotationSpeed)
         }
+
+        // CONFIGURACIÓN BOTÓN VOLVER (Para salir del modo 3D)
+        val btnVolver = findViewById<android.widget.ImageButton>(R.id.btnVolver3D)
+        btnVolver.setOnClickListener {
+            finish() // Cierra la pantalla negra y vuelve al Catálogo
+        }
     }
 
     private fun loadModel(fileName: String) {

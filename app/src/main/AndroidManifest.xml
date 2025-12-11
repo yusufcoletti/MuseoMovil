@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
-
     <uses-permission android:name="android.permission.CAMERA" />
 
     <uses-feature
@@ -26,14 +25,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MuseoMovil"
         tools:targetApi="31">
-
+        <activity
+            android:name=".CatalogoActivity"/>
         <activity
             android:name=".MenuActivity"
             android:exported="false" />
         <activity
             android:name=".Vista3DActivity"
             android:exported="false" />
-
         <activity
             android:name=".ArActivity"
             android:exported="false" />

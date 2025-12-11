@@ -38,6 +38,7 @@ dependencies {
     
     // Librería para visualización 3D (versión no-AR correcta)
     implementation "io.github.sceneview:sceneview:0.10.0"
+    implementation 'androidx.viewpager2:viewpager2:1.0.0'
 
     // Lirería para animación de aviones (más profesional)
     implementation 'com.airbnb.android:lottie:6.0.0'

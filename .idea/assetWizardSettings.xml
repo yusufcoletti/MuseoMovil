@@ -304,8 +304,8 @@
                         <option name="values">
                           <map>
                             <entry key="assetSourceType" value="FILE" />
-                            <entry key="outputName" value="ic_volume_on" />
-                            <entry key="sourceFile" value="C:\Users\MITAR\Documents\1. Universidad\Informatica\5 CURSO\NPI\volume_up_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg" />
+                            <entry key="outputName" value="ic_arrow_back" />
+                            <entry key="sourceFile" value="C:\Users\MITAR\Documents\1. Universidad\Informatica\5 CURSO\NPI\arrow_back_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg" />
                           </map>
                         </option>
                       </PersistentState>
