@@ -1,0 +1,30 @@
+# Archivos y directorios generados por Gradle o Android Studio
+
+# Directorios de compilación
+/build/
+/app/build/
+.gradle/
+.idea/
+.kotlin/
+.cxx/
+
+# Archivos de configuración y caché del IDE
+*.iml
+*.iws
+*.ipr
+local.properties
+.DS_Store # (Para usuarios de Mac)
+
+# Paquetes y salidas de depuración
+*.apk
+*.aab
+*.aar
+/captures/
+/lint-results.html
+/lint-results.xml
+
+# Directorios de pruebas de instrumentación
+/instrumentation-tests/
+
+# Carpetas de resultados de pruebas
+/test-results/

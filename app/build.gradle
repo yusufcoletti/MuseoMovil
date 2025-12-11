@@ -41,5 +41,9 @@ dependencies {
 
     // Lirería para animación de aviones (más profesional)
     implementation 'com.airbnb.android:lottie:6.0.0'
-    implementation 'androidx.activity:activity:1.8.0'
+
+    // Libreria AR
+    implementation 'io.github.sceneview:arsceneview:0.10.0'
+
+    implementation 'androidx.activity:activity:1.9.3'
 }
