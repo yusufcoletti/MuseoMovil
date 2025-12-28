@@ -76,7 +76,7 @@ class MenuActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         btnSonido.setOnClickListener { toggleSonido() }
 
         // 3. CONFIGURAR NFC (Botón Central)
-        val btnNFC = findViewById<CardView>(R.id.btnNFCPanel)
+        val btnNFC = findViewById<com.google.android.material.floatingactionbutton.FloatingActionButton>(R.id.btnNFCPanel)
         btnNFC.setOnClickListener { lanzarEscanerNFC() }
 
         // 4. CONFIGURAR IDIOMA
@@ -86,8 +86,8 @@ class MenuActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         }
 
         // 5. CONFIGURAR ASISTENTE (Robot)
-        val cardChatbot = findViewById<CardView>(R.id.cardChatbot)
-        cardChatbot.setOnClickListener {
+        val cardHero = findViewById<androidx.cardview.widget.CardView>(R.id.cardHero)
+        cardHero.setOnClickListener {
             Toast.makeText(this, "Hola, soy tu asistente virtual", Toast.LENGTH_SHORT).show()
         }
 

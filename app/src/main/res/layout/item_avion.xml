@@ -98,7 +98,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="INFO"
-                    android:backgroundTint="@color/aviation_silver"
+                    android:backgroundTint="@color/background_gray"
                     android:textColor="@color/aviation_navy"
                     android:layout_marginEnd="16dp"/>
 
