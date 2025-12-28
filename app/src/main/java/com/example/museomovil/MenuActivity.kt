@@ -19,6 +19,17 @@ import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.navigation.NavigationView
 import kotlin.math.abs
+import android.nfc.NfcAdapter
+import android.nfc.Tag
+import android.nfc.tech.Ndef
+import android.graphics.Color
+import android.app.Dialog
+import android.view.animation.AlphaAnimation
+import android.view.animation.Animation
+import android.provider.Settings
+import android.widget.TextView
+import android.widget.Button
+import android.widget.ImageView
 
 class MenuActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener, SensorEventListener {
 
@@ -46,6 +57,10 @@ class MenuActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     private var selectedIndex = 0
     private var isDrawerOpen = false
     private val menuIds = listOf(R.id.nav_que_ver, R.id.nav_mapa, R.id.nav_arte)
+
+    // --- VARIABLES NFC ---
+    private var nfcAdapter: NfcAdapter? = null
+    private var nfcDialog: Dialog? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -76,6 +91,7 @@ class MenuActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         btnSonido.setOnClickListener { toggleSonido() }
 
         // 3. CONFIGURAR NFC (Botón Central)
+        nfcAdapter = NfcAdapter.getDefaultAdapter(this)
         val btnNFC = findViewById<com.google.android.material.floatingactionbutton.FloatingActionButton>(R.id.btnNFCPanel)
         btnNFC.setOnClickListener { lanzarEscanerNFC() }
 
@@ -89,6 +105,8 @@ class MenuActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         val cardHero = findViewById<androidx.cardview.widget.CardView>(R.id.cardHero)
         cardHero.setOnClickListener {
             Toast.makeText(this, "Hola, soy tu asistente virtual", Toast.LENGTH_SHORT).show()
+            // Solo para probar si funciona el nfc
+            //irACatalogo("sala4_apache")
         }
 
         // 6. INICIALIZAR SENSORES
@@ -118,7 +136,95 @@ class MenuActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     private fun lanzarEscanerNFC() {
-        Toast.makeText(this, "Escanear NFC...", Toast.LENGTH_SHORT).show()
+        //Toast.makeText(this, "Escanear NFC...", Toast.LENGTH_SHORT).show()
+        // 1. Verificar si el dispositivo tiene NFC
+//        if (nfcAdapter == null) {
+//            Toast.makeText(this, "Este dispositivo no soporta NFC", Toast.LENGTH_SHORT).show()
+//            return
+//        }
+
+        // 2. Verificar si está activado
+        if (nfcAdapter != null && !nfcAdapter!!.isEnabled) {
+            Toast.makeText(this, "Por favor, activa el NFC", Toast.LENGTH_LONG).show()
+            startActivity(Intent(Settings.ACTION_NFC_SETTINGS))
+            return
+        }
+
+        // 3. Crear y mostrar el diálogo azul de pantalla completa
+        nfcDialog = Dialog(this, android.R.style.Theme_Black_NoTitleBar_Fullscreen)
+        val view = layoutInflater.inflate(R.layout.nfc_dialog, null)
+        nfcDialog?.setContentView(view)
+
+        // Hacer que el fondo sea transparente para que luzca tu degradado azul
+        //val parent = view.parent as View
+        //parent.setBackgroundColor(Color.TRANSPARENT)
+        // 4. Configurar animación de pulso en el icono ic_nfc
+        val imagenNfc = view.findViewById<ImageView>(R.id.imgNfcIcon)
+        val pulso = AlphaAnimation(0.4f, 1.0f).apply {
+            duration = 1000
+            repeatMode = Animation.REVERSE
+            repeatCount = Animation.INFINITE
+        }
+        imagenNfc.startAnimation(pulso)
+
+        // 5. Configurar botón cancelar
+        view.findViewById<Button>(R.id.btnCancelarNFC).setOnClickListener {
+            detenerEscaneoNFC()
+            nfcDialog?.dismiss()
+        }
+
+        nfcDialog?.show()
+
+        // 6. Activar la escucha real del chip
+        activarModoLector()
+    }
+    private fun activarModoLector() {
+        val options = Bundle()
+        // FLAG_READER_NFC_A es el estándar más común para etiquetas
+        nfcAdapter?.enableReaderMode(this, { tag ->
+            // ESTO SE EJECUTA EN UN HILO SECUNDARIO AL DETECTAR EL CHIP
+            val idLeido = leerIdDesdeTag(tag)
+
+            runOnUiThread {
+                if (idLeido != null) {
+                    nfcDialog?.dismiss()
+                    detenerEscaneoNFC()
+
+                    // Aquí llamamos a la lógica de desbloqueo (Paso 3)
+                    Toast.makeText(this, "Avión detectado: $idLeido", Toast.LENGTH_LONG).show()
+                    irACatalogo(idLeido)
+                }
+            }
+        }, NfcAdapter.FLAG_READER_NFC_A or NfcAdapter.FLAG_READER_SKIP_NDEF_CHECK, options)
+    }
+
+    private fun leerIdDesdeTag(tag: Tag): String? {
+        val ndef = Ndef.get(tag) ?: return null
+        return try {
+            ndef.connect()
+            val payload = ndef.ndefMessage.records[0].payload
+            // El estándar NDEF suele tener 3 bytes de metadatos de idioma al principio
+            String(payload, 3, payload.size - 3)
+        } catch (e: Exception) {
+            null
+        } finally {
+            ndef.close()
+        }
+    }
+
+    private fun detenerEscaneoNFC() {
+        nfcAdapter?.disableReaderMode(this)
+    }
+
+    private fun irACatalogo(idAvion: String) {
+        // 1. Guardar el progreso antes de irte
+        val dataManager = DataManager(this)
+        dataManager.desbloquearAvion(idAvion)
+
+        // 2. Navegar pasando el ID para que el catálogo sepa qué avión resaltar
+        val intent = Intent(this, CatalogoActivity::class.java)
+        intent.putExtra("ID_RECIEN_ESCANEDO", idAvion)
+        startActivity(intent)
     }
 
     // --- LÓGICA SONIDO ---
@@ -144,7 +250,11 @@ class MenuActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     // --- LÓGICA SENSORES (MENÚ) ---
     override fun onResume() { super.onResume(); acelerometro?.let { sensorManager.registerListener(this, it, SensorManager.SENSOR_DELAY_UI) } }
-    override fun onPause() { super.onPause(); sensorManager.unregisterListener(this) }
+    override fun onPause() {
+        super.onPause();
+        sensorManager.unregisterListener(this)
+        detenerEscaneoNFC()
+    }
 
     override fun onSensorChanged(event: SensorEvent?) {
         if (event == null || !isDrawerOpen) return

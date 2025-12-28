@@ -1,6 +1,7 @@
 package com.example.museomovil
 
 data class Avion(
+    val id: String,
     val nombre: String,
     val descripcion: String, // Info breve (la que sale al principio)
     val descripcionDetallada: String, // Info completa (historia, datos técnicos...)
