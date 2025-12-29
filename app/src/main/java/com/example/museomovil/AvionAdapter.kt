@@ -24,6 +24,8 @@ class AvionAdapter(private val listaAviones: List<Avion>, private val context: C
         val layoutBotones: LinearLayout = view.findViewById(R.id.layoutBotones)
         val btn3D: Button = view.findViewById(R.id.btnVer3D)
         val btnInfo: Button = view.findViewById(R.id.btnInfo)
+
+        val btnVerAR: Button = itemView.findViewById(R.id.btnVerAR)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AvionViewHolder {
@@ -54,6 +56,19 @@ class AvionAdapter(private val listaAviones: List<Avion>, private val context: C
                 val intent = Intent(context, Vista3DActivity::class.java)
                 // Aquí podrías pasar datos extra si quisieras cargar modelos distintos
                 context.startActivity(intent)
+            }
+
+            // --- LÓGICA BOTÓN AR (NUEVO) ---
+            holder.btnVerAR.setOnClickListener {
+                // Creamos el Intent para ir a la actividad de Realidad Aumentada
+                // Asegúrate de que tu actividad se llame 'ArActivity' o 'AugmentedRealityActivity'
+                val intent = Intent(holder.itemView.context, ArActivity::class.java)
+
+                // Le pasamos el nombre o ID del avión para que sepa cuál mostrar
+                intent.putExtra("NOMBRE_AVION", avion.nombre)
+
+                // Iniciamos la actividad
+                holder.itemView.context.startActivity(intent)
             }
 
             // Acción del botón INFO -> Abrir Bottom Sheet

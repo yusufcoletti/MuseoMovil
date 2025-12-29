@@ -109,6 +109,20 @@
                     android:text="VER 3D"
                     android:backgroundTint="@color/aviation_navy"
                     android:textColor="@color/white"/>
+
+                <Button
+                    android:id="@+id/btnVerAR"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="VER AR"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/white"
+                    android:backgroundTint="@color/accent_gold"
+                    android:layout_marginStart="8dp"
+                    app:icon="@drawable/ic_view_3d"
+                    app:iconTint="@color/aviation_navy"
+                    style="@style/Widget.MaterialComponents.Button.UnelevatedButton"/>
             </LinearLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
