@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="24dp"
+    app:cardBackgroundColor="@color/aviation_navy"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="10dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="24dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="CONTROLES DE VUELO"
+            android:textColor="@color/accent_gold"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:letterSpacing="0.1"
+            android:layout_marginBottom="24dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="16dp">
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_menu"
+                app:tint="@color/white"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Inclina el móvil a la IZQUIERDA bruscamente para abrir el menú lateral."
+                android:textColor="#E0E0E0"
+                android:textSize="14sp"
+                android:layout_marginStart="16dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="16dp">
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_view_3d"
+                app:tint="@color/white"/> <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="En menús: Inclina ADELANTE/ATRÁS para moverte y DERECHA para seleccionar."
+            android:textColor="#E0E0E0"
+            android:textSize="14sp"
+            android:layout_marginStart="16dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="16dp">
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_volume_on"
+                app:tint="@color/white"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Botones Físicos:\n[Vol +] Abrir Asistente\n[Vol -] Escáner NFC"
+                android:textColor="#E0E0E0"
+                android:textSize="14sp"
+                android:layout_marginStart="16dp"/>
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btnCerrarAyuda"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="ENTENDIDO, CAPITÁN"
+            android:backgroundTint="@color/accent_gold"
+            android:textColor="@color/aviation_navy"
+            android:textStyle="bold"
+            android:layout_marginTop="16dp"/>
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

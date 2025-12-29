@@ -14,7 +14,6 @@ import android.view.View
 import android.widget.ImageButton
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.cardview.widget.CardView
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.navigation.NavigationView
@@ -22,14 +21,16 @@ import kotlin.math.abs
 import android.nfc.NfcAdapter
 import android.nfc.Tag
 import android.nfc.tech.Ndef
-import android.graphics.Color
 import android.app.Dialog
 import android.view.animation.AlphaAnimation
 import android.view.animation.Animation
 import android.provider.Settings
-import android.widget.TextView
 import android.widget.Button
 import android.widget.ImageView
+// Importante para la vibración
+import android.os.VibrationEffect
+import android.os.Vibrator
+import android.view.KeyEvent
 
 class MenuActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener, SensorEventListener {
 
@@ -42,6 +43,7 @@ class MenuActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     private lateinit var sensorManager: SensorManager
     private var acelerometro: Sensor? = null
     private var lastUpdate: Long = 0
+    private val UMBRAL_TIEMPO = 500 // Tiempo de espera entre movimientos para que no vaya muy rápido
 
     // --- VARIABLES AUDIO ---
     private lateinit var audioManager: AudioManager
@@ -66,31 +68,43 @@ class MenuActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_menu)
 
-        // 1. CONFIGURAR MENÚ LATERAL (Sin Toolbar)
+        // 1. CONFIGURAR MENÚ LATERAL
         drawerLayout = findViewById(R.id.drawer_layout)
         navigationView = findViewById(R.id.nav_view)
         navigationView.setNavigationItemSelectedListener(this)
 
-        // Configurar el nuevo botón de menú (Hamburguesa)
+        // Marcar visualmente la primera opción al iniciar
+        navigationView.setCheckedItem(menuIds[0])
+
+        // Configurar el botón de menú (Hamburguesa)
         val btnMenu = findViewById<ImageButton>(R.id.btnMenuHamburguesa)
         btnMenu.setOnClickListener {
-            drawerLayout.openDrawer(GravityCompat.START)
+            if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+                drawerLayout.closeDrawer(GravityCompat.START)
+            } else {
+                drawerLayout.openDrawer(GravityCompat.START)
+            }
         }
 
-        // Listener para saber si el menú está abierto (para los gestos)
+        // Listener para saber si el menú está abierto
         drawerLayout.addDrawerListener(object : DrawerLayout.SimpleDrawerListener() {
-            override fun onDrawerOpened(drawerView: View) { isDrawerOpen = true; updateMenuSelection() }
-            override fun onDrawerClosed(drawerView: View) { isDrawerOpen = false }
+            override fun onDrawerOpened(drawerView: View) {
+                isDrawerOpen = true
+                // Sincronizar selección visual al abrir
+                navigationView.setCheckedItem(menuIds[selectedIndex])
+            }
+            override fun onDrawerClosed(drawerView: View) {
+                isDrawerOpen = false
+            }
         })
 
         // 2. CONFIGURAR AUDIO
         audioManager = getSystemService(Context.AUDIO_SERVICE) as AudioManager
         btnSonido = findViewById(R.id.btnSonidoPanel)
         actualizarIconoSonido()
-
         btnSonido.setOnClickListener { toggleSonido() }
 
-        // 3. CONFIGURAR NFC (Botón Central)
+        // 3. CONFIGURAR NFC (Botón Central - FloatingActionButton)
         nfcAdapter = NfcAdapter.getDefaultAdapter(this)
         val btnNFC = findViewById<com.google.android.material.floatingactionbutton.FloatingActionButton>(R.id.btnNFCPanel)
         btnNFC.setOnClickListener { lanzarEscanerNFC() }
@@ -101,20 +115,138 @@ class MenuActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             Toast.makeText(this, "Language changed to English", Toast.LENGTH_SHORT).show()
         }
 
-        // 5. CONFIGURAR ASISTENTE (Robot)
+        // 5. CONFIGURAR ASISTENTE (Banner Hero)
         val cardHero = findViewById<androidx.cardview.widget.CardView>(R.id.cardHero)
+
+        // Opción A: Click normal (Tocar)
         cardHero.setOnClickListener {
-            Toast.makeText(this, "Hola, soy tu asistente virtual", Toast.LENGTH_SHORT).show()
-            // Solo para probar si funciona el nfc
-            //irACatalogo("sala4_apache")
+            abrirAsistente()
+        }
+
+        // Opción B: Mantener pulsado (Long Click)
+        cardHero.setOnLongClickListener {
+            vibrar() // Pequeña vibración para confirmar
+            abrirAsistente()
+            true // 'true' significa que hemos consumido el evento
         }
 
         // 6. INICIALIZAR SENSORES
         sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
         acelerometro = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
+
+        // 7. CONFIGURAR BOTÓN DE AYUDA (?)
+        val btnAyuda = findViewById<ImageButton>(R.id.btnAyuda)
+        btnAyuda.setOnClickListener {
+            mostrarDialogoAyuda()
+        }
     }
 
-    // --- LÓGICA GESTO MULTITÁCTIL (2 DEDOS) ---
+    // --- CICLO DE VIDA ---
+    override fun onResume() {
+        super.onResume()
+        acelerometro?.let { sensorManager.registerListener(this, it, SensorManager.SENSOR_DELAY_UI) }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        sensorManager.unregisterListener(this)
+        detenerEscaneoNFC()
+    }
+
+    // --- LÓGICA DE SENSORES (CONTROL DEL MENÚ) ---
+    override fun onSensorChanged(event: SensorEvent?) {
+        if (event == null) return
+
+        val curTime = System.currentTimeMillis()
+
+        // Control de velocidad (Cooldown) para no saltar opciones muy rápido
+        if ((curTime - lastUpdate) > UMBRAL_TIEMPO) {
+            val x = event.values[0] // Eje X: Izquierda (+) / Derecha (-)
+            val y = event.values[1] // Eje Y: Inclinación Arriba/Abajo
+
+            if (isDrawerOpen) {
+                // --- MODO MENÚ ABIERTO: NAVEGACIÓN ---
+
+                // 1. ARRIBA / ABAJO (Eje Y)
+                if (y > 6.5) {
+                    // Inclinar hacia TI -> BAJAR OPCIÓN
+                    moveMenuSelection(1)
+                    lastUpdate = curTime
+                } else if (y < 3.0) {
+                    // Inclinar hacia ADELANTE -> SUBIR OPCIÓN
+                    moveMenuSelection(-1)
+                    lastUpdate = curTime
+                }
+
+                // 2. DERECHA (Seleccionar) -> Eje X < -4
+                if (x < -4.0) {
+                    vibrar()
+                    // Ejecutar la opción seleccionada
+                    val item = navigationView.menu.findItem(menuIds[selectedIndex])
+                    onNavigationItemSelected(item)
+                    lastUpdate = curTime + 500 // Pausa extra tras seleccionar
+                }
+
+                // 3. IZQUIERDA (Cerrar menú) -> Eje X > 4
+                if (x > 4.0) {
+                    vibrar()
+                    drawerLayout.closeDrawer(GravityCompat.START)
+                    lastUpdate = curTime
+                }
+
+            } else {
+                // --- MODO MENÚ CERRADO: ABRIR ---
+
+                // Inclinar a la IZQUIERDA fuerte -> ABRIR MENÚ
+                if (x > 5.0) {
+                    vibrar()
+                    drawerLayout.openDrawer(GravityCompat.START)
+                    lastUpdate = curTime + 500 // Pausa para que no empiece a navegar solo
+                }
+            }
+        }
+    }
+
+    private fun moveMenuSelection(direction: Int) {
+        val nuevoIndex = selectedIndex + direction
+
+        // Comprobar límites para no salirnos de la lista
+        if (nuevoIndex in 0 until menuIds.size) {
+            selectedIndex = nuevoIndex
+            // Feedback Visual: Iluminamos la opción
+            navigationView.setCheckedItem(menuIds[selectedIndex])
+            // Feedback Táctil
+            vibrar()
+        }
+    }
+
+    // Método auxiliar para vibrar
+    private fun vibrar() {
+        val v = getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            v.vibrate(VibrationEffect.createOneShot(50, VibrationEffect.DEFAULT_AMPLITUDE))
+        } else {
+            v.vibrate(50)
+        }
+    }
+
+    override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {}
+
+    // --- NAVEGACIÓN ---
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        drawerLayout.closeDrawer(GravityCompat.START)
+        // Pequeño delay para que se vea la animación de cierre antes de cambiar
+        drawerLayout.postDelayed({
+            when (item.itemId) {
+                R.id.nav_que_ver -> irACatalogo("")
+                R.id.nav_mapa -> Toast.makeText(this, "Abriendo Mapa...", Toast.LENGTH_SHORT).show()
+                R.id.nav_arte -> Toast.makeText(this, "Arte Digital...", Toast.LENGTH_SHORT).show()
+            }
+        }, 250)
+        return true
+    }
+
+    // --- GESTO MULTITÁCTIL (2 DEDOS) ---
     override fun dispatchTouchEvent(event: MotionEvent?): Boolean {
         if (event == null) return super.dispatchTouchEvent(event)
         if (event.pointerCount == 2) {
@@ -135,30 +267,17 @@ class MenuActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         return super.dispatchTouchEvent(event)
     }
 
+    // --- LÓGICA NFC ---
     private fun lanzarEscanerNFC() {
-        //Toast.makeText(this, "Escanear NFC...", Toast.LENGTH_SHORT).show()
-        // 1. Verificar si el dispositivo tiene NFC
-//        if (nfcAdapter == null) {
-//            Toast.makeText(this, "Este dispositivo no soporta NFC", Toast.LENGTH_SHORT).show()
-//            return
-//        }
-
-        // 2. Verificar si está activado
         if (nfcAdapter != null && !nfcAdapter!!.isEnabled) {
             Toast.makeText(this, "Por favor, activa el NFC", Toast.LENGTH_LONG).show()
             startActivity(Intent(Settings.ACTION_NFC_SETTINGS))
             return
         }
-
-        // 3. Crear y mostrar el diálogo azul de pantalla completa
         nfcDialog = Dialog(this, android.R.style.Theme_Black_NoTitleBar_Fullscreen)
         val view = layoutInflater.inflate(R.layout.nfc_dialog, null)
         nfcDialog?.setContentView(view)
 
-        // Hacer que el fondo sea transparente para que luzca tu degradado azul
-        //val parent = view.parent as View
-        //parent.setBackgroundColor(Color.TRANSPARENT)
-        // 4. Configurar animación de pulso en el icono ic_nfc
         val imagenNfc = view.findViewById<ImageView>(R.id.imgNfcIcon)
         val pulso = AlphaAnimation(0.4f, 1.0f).apply {
             duration = 1000
@@ -167,30 +286,22 @@ class MenuActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         }
         imagenNfc.startAnimation(pulso)
 
-        // 5. Configurar botón cancelar
         view.findViewById<Button>(R.id.btnCancelarNFC).setOnClickListener {
             detenerEscaneoNFC()
             nfcDialog?.dismiss()
         }
-
         nfcDialog?.show()
-
-        // 6. Activar la escucha real del chip
         activarModoLector()
     }
+
     private fun activarModoLector() {
         val options = Bundle()
-        // FLAG_READER_NFC_A es el estándar más común para etiquetas
         nfcAdapter?.enableReaderMode(this, { tag ->
-            // ESTO SE EJECUTA EN UN HILO SECUNDARIO AL DETECTAR EL CHIP
             val idLeido = leerIdDesdeTag(tag)
-
             runOnUiThread {
                 if (idLeido != null) {
                     nfcDialog?.dismiss()
                     detenerEscaneoNFC()
-
-                    // Aquí llamamos a la lógica de desbloqueo (Paso 3)
                     Toast.makeText(this, "Avión detectado: $idLeido", Toast.LENGTH_LONG).show()
                     irACatalogo(idLeido)
                 }
@@ -203,7 +314,6 @@ class MenuActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         return try {
             ndef.connect()
             val payload = ndef.ndefMessage.records[0].payload
-            // El estándar NDEF suele tener 3 bytes de metadatos de idioma al principio
             String(payload, 3, payload.size - 3)
         } catch (e: Exception) {
             null
@@ -217,17 +327,16 @@ class MenuActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     private fun irACatalogo(idAvion: String) {
-        // 1. Guardar el progreso antes de irte
-        val dataManager = DataManager(this)
-        dataManager.desbloquearAvion(idAvion)
-
-        // 2. Navegar pasando el ID para que el catálogo sepa qué avión resaltar
         val intent = Intent(this, CatalogoActivity::class.java)
-        intent.putExtra("ID_RECIEN_ESCANEDO", idAvion)
+        if (idAvion.isNotEmpty()) {
+            val dataManager = DataManager(this)
+            dataManager.desbloquearAvion(idAvion)
+            intent.putExtra("ID_RECIEN_ESCANEDO", idAvion)
+        }
         startActivity(intent)
     }
 
-    // --- LÓGICA SONIDO ---
+    // --- AUDIO ---
     private fun actualizarIconoSonido() {
         val currentVolume = audioManager.getStreamVolume(AudioManager.STREAM_MUSIC)
         btnSonido.setImageResource(if (currentVolume == 0) R.drawable.ic_volume_off else R.drawable.ic_volume_on)
@@ -248,39 +357,55 @@ class MenuActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         actualizarIconoSonido()
     }
 
-    // --- LÓGICA SENSORES (MENÚ) ---
-    override fun onResume() { super.onResume(); acelerometro?.let { sensorManager.registerListener(this, it, SensorManager.SENSOR_DELAY_UI) } }
-    override fun onPause() {
-        super.onPause();
-        sensorManager.unregisterListener(this)
-        detenerEscaneoNFC()
-    }
+    // --- CONTROL POR BOTONES FÍSICOS (HARDWARE) ---
+    // --- CONTROL DE HARDWARE (BOTONES FÍSICOS) ---
+    override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
 
-    override fun onSensorChanged(event: SensorEvent?) {
-        if (event == null || !isDrawerOpen) return
-        if ((System.currentTimeMillis() - lastUpdate) > 400) {
-            val x = event.values[0]; val z = event.values[2]
+        when (keyCode) {
+            // Caso 1: Botón SUBIR VOLUMEN -> Abre el Asistente
+            KeyEvent.KEYCODE_VOLUME_UP -> {
+                vibrar()
+                val intent = Intent(this, AsistenteActivity::class.java)
+                startActivity(intent)
+                return true // 'true' evita que suba el volumen real
+            }
 
-            if (x < -3.5) { selectedIndex = (selectedIndex + 1) % menuIds.size; updateMenuSelection(); lastUpdate = System.currentTimeMillis() }
-            else if (x > 3.5) { selectedIndex = if (selectedIndex - 1 < 0) menuIds.size - 1 else selectedIndex - 1; updateMenuSelection(); lastUpdate = System.currentTimeMillis() }
-
-            if (z > 8.0 && abs(x) < 2) {
-                onNavigationItemSelected(navigationView.menu.findItem(menuIds[selectedIndex]))
-                lastUpdate = System.currentTimeMillis() + 1000
+            // Caso 2: Botón BAJAR VOLUMEN -> Lanza el Escáner NFC
+            KeyEvent.KEYCODE_VOLUME_DOWN -> {
+                vibrar()
+                lanzarEscanerNFC() // Llamamos a tu función existente
+                return true // 'true' evita que baje el volumen real
             }
         }
+
+        // Si es otro botón (atrás, encendido...), dejamos que Android lo maneje
+        return super.onKeyDown(keyCode, event)
     }
-    override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {}
 
-    private fun updateMenuSelection() { navigationView.setCheckedItem(menuIds[selectedIndex]) }
+    // --- MÉTODO AUXILIAR PARA ABRIR ASISTENTE ---
+    // Creamos esto para no repetir código en el click, long click y botón físico
+    private fun abrirAsistente() {
+        val intent = Intent(this, AsistenteActivity::class.java)
+        startActivity(intent)
+        // Opcional: Transición suave
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
+    }
 
-    override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.nav_que_ver -> startActivity(Intent(this, CatalogoActivity::class.java))
-            R.id.nav_mapa -> Toast.makeText(this, "Mapa", Toast.LENGTH_SHORT).show()
-            R.id.nav_arte -> Toast.makeText(this, "Arte Digital", Toast.LENGTH_SHORT).show()
+    // --- DIÁLOGO DE AYUDA ---
+    private fun mostrarDialogoAyuda() {
+        val dialog = Dialog(this)
+        dialog.setContentView(R.layout.dialog_help)
+
+        // Hacemos el fondo del diálogo transparente para que se vean las esquinas redondeadas del CardView
+        dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
+
+        // Configurar botón cerrar
+        val btnCerrar = dialog.findViewById<Button>(R.id.btnCerrarAyuda)
+        btnCerrar.setOnClickListener {
+            vibrar() // Pequeño feedback al cerrar
+            dialog.dismiss()
         }
-        drawerLayout.closeDrawer(GravityCompat.START)
-        return true
+
+        dialog.show()
     }
 }

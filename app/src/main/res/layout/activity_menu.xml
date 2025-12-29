@@ -25,6 +25,18 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <ImageButton
+            android:id="@+id/btnAyuda"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_margin="16dp"
+            android:background="@drawable/white_circle_bg"
+            android:elevation="6dp"
+            android:src="@android:drawable/ic_menu_help"
+            app:tint="@color/aviation_navy"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <ScrollView
             android:id="@+id/scrollViewCenter"
             android:layout_width="match_parent"
@@ -316,6 +328,7 @@
         android:background="@color/aviation_navy"
         app:itemIconTint="@color/white"
         app:itemTextColor="@color/white"
+        app:itemBackground="@drawable/nav_item_background"
         app:headerLayout="@layout/nav_header"
         app:menu="@menu/activity_main_drawer" />
 
