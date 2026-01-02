@@ -17,6 +17,10 @@
         android:name="android.hardware.sensor.gyroscope"
         android:required="true" />
 
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -28,7 +32,10 @@
         android:theme="@style/Theme.MuseoMovil"
         tools:targetApi="31">
         <activity
-            android:name=".CatalogoActivity"/>
+            android:name=".TourActivity"
+            android:exported="false"
+            android:label="Mapa GPS" />
+        <activity android:name=".CatalogoActivity" />
         <activity
             android:name=".Vista3DActivity"
             android:exported="false" />
@@ -43,18 +50,19 @@
 
         <activity
             android:name=".MainActivity"
-            android:exported="true"/>
-
-        <activity android:name=".MenuActivity"
+            android:exported="true" />
+        <activity
+            android:name=".MenuActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".AsistenteActivity"
-            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".AsistenteActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

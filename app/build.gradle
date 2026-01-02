@@ -47,4 +47,7 @@ dependencies {
     implementation 'io.github.sceneview:arsceneview:0.10.0'
 
     implementation 'androidx.activity:activity:1.9.3'
+
+    // Libreria gps
+    implementation 'com.google.android.gms:play-services-location:21.0.1'
 }

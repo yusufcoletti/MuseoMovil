@@ -239,7 +239,9 @@ class MenuActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         drawerLayout.postDelayed({
             when (item.itemId) {
                 R.id.nav_que_ver -> irACatalogo("")
-                R.id.nav_mapa -> Toast.makeText(this, "Abriendo Mapa...", Toast.LENGTH_SHORT).show()
+                R.id.nav_mapa -> {
+                    val intent = Intent(this, TourActivity::class.java)
+                    startActivity(intent)}
                 R.id.nav_arte -> Toast.makeText(this, "Arte Digital...", Toast.LENGTH_SHORT).show()
             }
         }, 250)
