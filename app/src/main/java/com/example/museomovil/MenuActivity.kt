@@ -31,6 +31,7 @@ import android.widget.ImageView
 import android.os.VibrationEffect
 import android.os.Vibrator
 import android.view.KeyEvent
+import android.widget.TextView
 
 class MenuActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener, SensorEventListener {
 
@@ -64,6 +65,9 @@ class MenuActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     private var nfcAdapter: NfcAdapter? = null
     private var nfcDialog: Dialog? = null
 
+    // --- BARRA DE PROGRESO ---
+    private lateinit var txtProgresoCuenta: TextView
+    private lateinit var imgAvionProgreso: ImageView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_menu)
@@ -139,12 +143,19 @@ class MenuActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         btnAyuda.setOnClickListener {
             mostrarDialogoAyuda()
         }
+
+        //
+        txtProgresoCuenta = findViewById(R.id.txtProgresoCuenta)
+        imgAvionProgreso = findViewById(R.id.imgAvionProgreso)
     }
 
     // --- CICLO DE VIDA ---
     override fun onResume() {
         super.onResume()
         acelerometro?.let { sensorManager.registerListener(this, it, SensorManager.SENSOR_DELAY_UI) }
+
+        // ACTUALIZAR BARRA DE PROGRESO
+        actualizarBarraProgreso()
     }
 
     override fun onPause() {
@@ -298,29 +309,59 @@ class MenuActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     private fun activarModoLector() {
         val options = Bundle()
+        // IMPORTANTE: Usamos estos flags para permitir leer cualquier etiqueta y asegurar que Android chequee NDEF
+        val flags = NfcAdapter.FLAG_READER_NFC_A or
+                NfcAdapter.FLAG_READER_NFC_B or
+                NfcAdapter.FLAG_READER_NFC_F or
+                NfcAdapter.FLAG_READER_NFC_V
+
         nfcAdapter?.enableReaderMode(this, { tag ->
             val idLeido = leerIdDesdeTag(tag)
+
             runOnUiThread {
-                if (idLeido != null) {
+                if (idLeido != null && idLeido.isNotEmpty()) {
+                    // Éxito: Cerramos todo y navegamos
                     nfcDialog?.dismiss()
                     detenerEscaneoNFC()
                     Toast.makeText(this, "Avión detectado: $idLeido", Toast.LENGTH_LONG).show()
                     irACatalogo(idLeido)
+                } else {
+                    // Fallo de lectura (etiqueta vacía o error)
+                    Toast.makeText(this, "Error al leer. Asegúrate de que la etiqueta tiene texto grabado.", Toast.LENGTH_SHORT).show()
                 }
             }
-        }, NfcAdapter.FLAG_READER_NFC_A or NfcAdapter.FLAG_READER_SKIP_NDEF_CHECK, options)
+        }, flags, options)
     }
 
     private fun leerIdDesdeTag(tag: Tag): String? {
         val ndef = Ndef.get(tag) ?: return null
+
         return try {
             ndef.connect()
-            val payload = ndef.ndefMessage.records[0].payload
-            String(payload, 3, payload.size - 3)
+            val record = ndef.ndefMessage.records[0]
+            val payload = record.payload
+
+            // Lógica para detectar encoding y longitud del idioma
+            val statusByte = payload[0].toInt()
+            val languageCodeLength = statusByte and 0x3F
+            val textEncoding = if ((statusByte and 128) == 0) "UTF-8" else "UTF-16"
+
+            // Extraer texto saltando la cabecera
+            val texto = String(
+                payload,
+                1 + languageCodeLength,
+                payload.size - 1 - languageCodeLength,
+                java.nio.charset.Charset.forName(textEncoding)
+            )
+
+            // IMPORTANTE: .trim() elimina espacios fantasma que meten los iPhone
+            return texto.trim()
+
         } catch (e: Exception) {
+            e.printStackTrace()
             null
         } finally {
-            ndef.close()
+            try { ndef.close() } catch (e: Exception) {}
         }
     }
 
@@ -409,5 +450,54 @@ class MenuActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         }
 
         dialog.show()
+    }
+
+    // Función auxiliar para calcular matemáticas de la barra
+    private fun actualizarBarraProgreso() {
+        // Verificamos que las vistas existen
+        if (!::txtProgresoCuenta.isInitialized || !::imgAvionProgreso.isInitialized) return
+
+        val dataManager = DataManager(this)
+        val desbloqueados = dataManager.getAvionesDesbloqueadosCount()
+        val total = 15
+
+        // 1. Calcular Porcentaje (0.0 a 1.0)
+        val porcentaje = if (total > 0) desbloqueados.toFloat() / total.toFloat() else 0f
+
+        // 2. TEXTO CUENTA: "4 / 15"
+        txtProgresoCuenta.text = "$desbloqueados / $total"
+
+        // 3. MOVER EL AVIÓN (Horizontal Bias)
+        val params = imgAvionProgreso.layoutParams as? androidx.constraintlayout.widget.ConstraintLayout.LayoutParams
+        params?.let {
+            it.horizontalBias = porcentaje.coerceIn(0.0f, 1.0f)
+            imgAvionProgreso.layoutParams = it
+        }
+
+        // 4. LÓGICA DE RANGOS
+        // Aspirante (<4), Cadete (4-6), Segundo Oficial (7-11), Primer Oficial (12-14), Capitán (15)
+        val rangoTitulo = when {
+            desbloqueados >= 15 -> "Capitán"
+            desbloqueados >= 12 -> "Primer Oficial"
+            desbloqueados >= 7  -> "Segundo Oficial"
+            desbloqueados >= 4  -> "Cadete"
+            else -> "Aspirante"
+        }
+
+        // --- ACTUALIZAR UI EN TARJETA PRINCIPAL ---
+        // Buscamos el TextView del nivel (asegúrate de haberlo puesto en el XML paso 2)
+        val txtNivelMain = findViewById<TextView>(R.id.txtNivelPiloto)
+        txtNivelMain?.text = "Nivel: $rangoTitulo"
+
+        // Cambiamos el color del texto si es Capitán para darle epicidad
+        if (desbloqueados == 15) {
+            txtNivelMain?.setTextColor(getColor(R.color.accent_gold)) // O Color.YELLOW
+        }
+
+        // --- ACTUALIZAR UI EN MENÚ LATERAL (HEADER) ---
+        // Accedemos a la cabecera del menú lateral
+        val headerView = navigationView.getHeaderView(0)
+        val txtRangoHeader = headerView.findViewById<TextView>(R.id.txtRangoHeader)
+        txtRangoHeader?.text = "Rango: $rangoTitulo"
     }
 }

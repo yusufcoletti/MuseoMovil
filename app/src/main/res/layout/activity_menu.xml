@@ -109,102 +109,103 @@
                 </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
-                    android:id="@+id/cardProgresoContainer"
+                    android:id="@+id/cardProgreso"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="24dp"
-                    app:cardBackgroundColor="@color/white"
+                    android:layout_marginBottom="16dp"
                     app:cardCornerRadius="16dp"
-                    app:cardElevation="4dp">
+                    app:cardElevation="6dp"
+                    app:cardBackgroundColor="@android:color/white">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        android:padding="24dp">
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:paddingHorizontal="20dp"
-                            android:paddingTop="20dp"
-                            android:paddingBottom="12dp"> <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="BOARDING PASS"
-                            android:fontFamily="sans-serif-condensed"
-                            android:textColor="@color/metal_gray"
-                            android:letterSpacing="0.1"
-                            android:textSize="14sp"
-                            android:textStyle="bold" />
+                            android:orientation="horizontal">
+
                             <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="BOARDING PASS"
+                                android:fontFamily="sans-serif-condensed"
+                                android:letterSpacing="0.05"
+                                android:textStyle="bold"
+                                android:textColor="#0D47A1"/>
+
+                            <TextView
+                                android:id="@+id/txtProgresoCuenta"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="1 / 15"
-                                android:textColor="@color/aviation_navy"
-                                android:textSize="18sp"
-                                android:textStyle="bold" />
+                                android:text="0 / 15"
+                                android:fontFamily="sans-serif-condensed"
+                                android:textStyle="bold"
+                                android:textColor="#0D47A1"/>
                         </LinearLayout>
 
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="2dp"
-                            android:background="@drawable/line_dashed"
-                            android:layerType="software"
-                            android:layout_marginHorizontal="10dp"/>
+                        <TextView
+                            android:id="@+id/txtNivelPiloto"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Nivel: Aspirante"
+                            android:textSize="14sp"
+                            android:textColor="#757575"
+                            android:layout_marginTop="4dp"/>
 
-                        <LinearLayout
+                        <androidx.constraintlayout.widget.ConstraintLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            android:padding="20dp">
+                            android:layout_marginTop="20dp"
+                            android:layout_marginBottom="8dp">
 
-                            <androidx.constraintlayout.widget.ConstraintLayout
+                            <View
+                                android:id="@+id/trackLineGray"
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content">
+                                android:layout_height="6dp"
+                                android:background="#E0E0E0"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintBottom_toBottomOf="parent"/>
 
-                                <View
-                                    android:id="@+id/trackLine"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="6dp"
-                                    android:background="#E0E0E0"
-                                    app:layout_constraintBottom_toBottomOf="@+id/imgAvionProgreso"
-                                    app:layout_constraintTop_toTopOf="@+id/imgAvionProgreso" />
+                            <View
+                                android:id="@+id/trackLineColor"
+                                android:layout_width="0dp"
+                                android:layout_height="6dp"
+                                android:background="#0D47A1"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintEnd_toEndOf="@id/imgAvionProgreso"
+                                app:layout_constraintTop_toTopOf="@id/trackLineGray"
+                                app:layout_constraintBottom_toBottomOf="@id/trackLineGray"/>
 
-                                <View
-                                    android:layout_width="0dp"
-                                    android:layout_height="6dp"
-                                    android:background="@color/accent_gold"
-                                    app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintEnd_toStartOf="@+id/imgAvionProgreso"
-                                    app:layout_constraintTop_toTopOf="@+id/trackLine"
-                                    app:layout_constraintBottom_toBottomOf="@+id/trackLine"/>
+                            <ImageView
+                                android:id="@+id/imgAvionProgreso"
+                                android:layout_width="32dp"
+                                android:layout_height="32dp"
+                                android:src="@drawable/ic_plane_small"
+                                app:tint="#0D47A1"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintHorizontal_bias="0.0"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintBottom_toBottomOf="parent"/>
 
-                                <ImageView
-                                    android:id="@+id/imgAvionProgreso"
-                                    android:layout_width="32dp"
-                                    android:layout_height="32dp"
-                                    android:src="@drawable/ic_plane_small"
-                                    app:tint="@color/aviation_navy"
-                                    android:rotation="-15"
-                                    android:scaleType="fitCenter"
-                                    app:layout_constraintHorizontal_bias="0.1"
-                                    app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintEnd_toEndOf="parent"
-                                    app:layout_constraintTop_toTopOf="parent"
-                                    app:layout_constraintBottom_toBottomOf="parent" />
-                            </androidx.constraintlayout.widget.ConstraintLayout>
+                        </androidx.constraintlayout.widget.ConstraintLayout>
 
-                            <TextView
-                                android:text="DESTINO: HANGAR PRINCIPAL"
-                                android:textSize="11sp"
-                                android:textStyle="bold"
-                                android:textColor="#546E7A"
-                                android:layout_marginTop="12dp"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"/>
-                        </LinearLayout>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="DESTINO: HANGAR PRINCIPAL"
+                            android:textSize="10sp"
+                            android:fontFamily="sans-serif-condensed"
+                            android:letterSpacing="0.05"
+                            android:textColor="#9E9E9E"
+                            android:layout_marginTop="8dp"
+                            android:layout_gravity="end"/>
+
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
