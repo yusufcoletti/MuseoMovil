@@ -28,3 +28,5 @@ local.properties
 
 # Carpetas de resultados de pruebas
 /test-results/
+
+.gradle/
