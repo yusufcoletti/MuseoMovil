@@ -27,7 +27,8 @@ data class SalaMuseo(
     val latitud: Double,
     val longitud: Double,
     val audioRes: Int,
-    val imgRes: Int
+    val imgRes: Int,
+    val pista: String
 )
 
 class TourActivity : AppCompatActivity() {
@@ -42,19 +43,14 @@ class TourActivity : AppCompatActivity() {
     private lateinit var spinnerDestinos: Spinner
     private lateinit var btnAtras: ImageButton
 
+    private var listaSalas: List<SalaMuseo> = emptyList()
+
     // Variables de lógica
     private var mediaPlayer: MediaPlayer? = null
     private var salaActual: SalaMuseo? = null
     private var salaDestino: SalaMuseo? = null // La sala que el usuario elige ir
+    private var salasInicializadas = false
 
-    // TUS 5 SALAS (Pon coordenadas ligeramente distintas para probar la navegación)
-    private val listaSalas = listOf(
-        SalaMuseo("Lobby Principal", 40.416700, -3.703700, R.raw.guia_audio, R.mipmap.ic_launcher),
-        SalaMuseo("Sala Planeadores", 40.416800, -3.703800, R.raw.guia_audio, R.mipmap.ic_launcher),
-        SalaMuseo("Aviones Guerra", 40.416900, -3.703900, R.raw.guia_audio, R.mipmap.ic_launcher),
-        SalaMuseo("Aviones Comerciales", 40.417000, -3.704000, R.raw.guia_audio, R.mipmap.ic_launcher),
-        SalaMuseo("Helicópteros", 40.417100, -3.704100, R.raw.guia_audio, R.mipmap.ic_launcher)
-    )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -75,6 +71,9 @@ class TourActivity : AppCompatActivity() {
             mediaPlayer?.stop() // Parar audio si suena
             finish() // Cierra esta actividad y vuelve al menú anterior
         }
+
+        // Configurar salas del museo
+        generarSalasDePrueba(null)
 
         // 2. CONFIGURAR SPINNER (SELECTOR)
         configurarSelectorDestino()
@@ -138,17 +137,17 @@ class TourActivity : AppCompatActivity() {
             locDestino.longitude = salaDestino!!.longitud
 
             val distanciaMetros = ubicacionActual.distanceTo(locDestino)
-            txtDistanciaRestante.text = "Faltan ${"%.1f".format(distanciaMetros)} metros"
+            txtDistanciaRestante.text = "${"%.1f".format(distanciaMetros)} m"
 
             if (distanciaMetros < 10.0) {
-                txtInstruccion.text = "¡Has llegado a ${salaDestino!!.nombre}!"
-                txtInstruccion.setTextColor(resources.getColor(android.R.color.holo_green_dark))
+                txtInstruccion.text = "¡Has llegado!"
+                // Opcional: Cambiar color a dorado al llegar
+                txtInstruccion.setTextColor(resources.getColor(R.color.accent_gold))
             } else {
-                // Dar indicación de orientación (Norte, Sur, etc)
-                val bearing = ubicacionActual.bearingTo(locDestino) // Grados respecto al Norte
-                val direccion = obtenerDireccionTexto(bearing)
-                txtInstruccion.text = "Camina hacia el $direccion"
-                txtInstruccion.setTextColor(resources.getColor(android.R.color.black))
+                // AQUÍ ESTÁ EL CAMBIO: Usamos la pista humana
+                txtInstruccion.text = salaDestino!!.pista
+                // Aseguramos que sea blanco (ya que el XML lo tiene, pero por si acaso)
+                txtInstruccion.setTextColor(resources.getColor(R.color.white))
             }
         }
 
@@ -219,5 +218,53 @@ class TourActivity : AppCompatActivity() {
         super.onStop()
         mediaPlayer?.release()
         mediaPlayer = null
+    }
+
+    // TUS 5 SALAS (Pon coordenadas ligeramente distintas para probar la navegación)
+    private fun generarSalasDePrueba(miUbicacion: Location?) {
+
+        // Coordenadas ETSIIT Granada (Calle Periodista Daniel Saucedo Aranda)
+        // Centro aproximado: 37.197150, -3.624500
+
+        listaSalas = listOf(
+            SalaMuseo(
+                "Lobby Principal",
+                37.197150, -3.624500, // Entrada Principal / Conserjería
+                R.raw.guia_audio,
+                R.mipmap.ic_launcher,
+                "Ve a la entrada principal, frente a la conserjería."
+            ),
+            SalaMuseo(
+                "Planeadores",
+                37.197350, -3.624700, // Hacia la Cafetería
+                R.raw.guia_audio,
+                R.mipmap.ic_launcher,
+                "Baja las escaleras y dirígete hacia la entrada de la cafetería."
+            ),
+            SalaMuseo(
+                "Aviones Guerra",
+                37.196900, -3.624500, // Hacia la Biblioteca / Sur
+                R.raw.guia_audio,
+                R.mipmap.ic_launcher,
+                "Camina por el pasillo principal hacia la zona de la Biblioteca."
+            ),
+            SalaMuseo(
+                "Aviones Comerciales",
+                37.197200, -3.624100, // Aularios / Este
+                R.raw.guia_audio,
+                R.mipmap.ic_launcher,
+                "Sube a la primera planta, hacia la zona de los despachos y aulas."
+            ),
+            SalaMuseo(
+                "Helicópteros",
+                37.197100, -3.625000, // Parking / Exterior Oeste
+                R.raw.guia_audio,
+                R.mipmap.ic_launcher,
+                "Sal al exterior por la puerta lateral, hacia el aparcamiento."
+            )
+        )
+
+        // Refrescamos el Spinner
+        configurarSelectorDestino()
     }
 }
