@@ -51,7 +51,8 @@ class CatalogoActivity : AppCompatActivity(), SensorEventListener {
                 descripcion = "SALA 1. El precursor de la aviación ultraligera. Un diseño elegante y pequeño creado por Santos-Dumont en 1907.",
                 descripcionDetallada = "Una obra maestra de la ingeniería ligera creada por Santos-Dumont. Construido con bambú y seda, fue el primer avión \"deportivo\" del mundo y precursor de la aviación ultraligera moderna.",
                 imagenResId = R.drawable.planeador_demoiselle,
-                isDesbloqueado = true // ¡Este te lo regalo desbloqueado para probar!
+                isDesbloqueado = true, // ¡Este te lo regalo desbloqueado para probar!
+                modelo3D = "dumont-demoisselle.glb"
             ),
             Avion(
                 id = "sala1_globo",

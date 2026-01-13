@@ -1,23 +1,18 @@
 package com.example.museomovil
 
 import android.os.Bundle
+import android.widget.ImageButton
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import io.github.sceneview.SceneView
 import io.github.sceneview.math.Position
 import io.github.sceneview.math.Rotation
 import io.github.sceneview.node.ModelNode
-import kotlin.math.max
-import kotlin.math.min
 
 class Vista3DActivity : AppCompatActivity() {
 
-    private lateinit var gyroscope: Gyroscope3D
     private var modelNode: ModelNode? = null
     private lateinit var sceneView: SceneView
-
-    private val MIN_ROTATION_Y = -45f
-    private val MAX_ROTATION_Y = 45f
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,52 +20,48 @@ class Vista3DActivity : AppCompatActivity() {
 
         sceneView = findViewById(R.id.sceneView)
 
-        loadModel("tinker.glb")
+        // Obtener el archivo del modelo desde el Intent
+        val modelFileName = intent.getStringExtra("MODEL_FILE") ?: "tinker.glb"
+        val modelName = intent.getStringExtra("MODEL_NAME") ?: "Modelo 3D"
 
-        gyroscope = Gyroscope3D(this) { rotationSpeed ->
-            rotateModel(rotationSpeed)
-        }
+        loadModel(modelFileName)
 
         // CONFIGURACIÓN BOTÓN VOLVER (Para salir del modo 3D)
-        val btnVolver = findViewById<android.widget.ImageButton>(R.id.btnVolver3D)
+        val btnVolver = findViewById<ImageButton>(R.id.btnVolver3D)
         btnVolver.setOnClickListener {
-            finish() // Cierra la pantalla negra y vuelve al Catálogo
+            finish() // Cierra la pantalla y vuelve al Catálogo
         }
     }
 
     private fun loadModel(fileName: String) {
+        // Si ya hay un nodo, lo eliminamos para evitar duplicados en el re-intento
+        modelNode?.let { sceneView.removeChild(it) }
+
         modelNode = ModelNode(sceneView.engine).apply {
             loadModelGlbAsync(
                 glbFileLocation = fileName,
-                autoAnimate = true,
+                autoAnimate = false,
                 scaleToUnits = 1.0f,
                 centerOrigin = Position(0f, 0f, 0f),
                 onError = { exception ->
-                    Toast.makeText(this@Vista3DActivity, "Error al cargar modelo: ${exception.message}", Toast.LENGTH_LONG).show()
+                    // Si el error no es ya con el tinker, intentamos cargar el tinker por defecto
+                    if (fileName != "tinker.glb") {
+                        Toast.makeText(
+                            this@Vista3DActivity,
+                            "Modelo no encontrado. Cargando Tinker por defecto.",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                        loadModel("tinker.glb")
+                    } else {
+                        Toast.makeText(
+                            this@Vista3DActivity,
+                            "Error crítico: No se pudo cargar ni el modelo por defecto.",
+                            Toast.LENGTH_LONG
+                        ).show()
+                    }
                 }
             )
-
-            rotation = Rotation(x = -90f, y = 0f, z = 0f)
         }
         sceneView.addChild(modelNode!!)
-    }
-
-    private fun rotateModel(speed: Float) {
-        modelNode?.let { node ->
-            val currentRotation = node.rotation
-            var newY = currentRotation.y + speed
-            newY = max(MIN_ROTATION_Y, min(newY, MAX_ROTATION_Y))
-            node.rotation = Rotation(node.rotation.x, newY, node.rotation.z)
-        }
-    }
-
-    override fun onResume() {
-        super.onResume()
-        gyroscope.start()
-    }
-
-    override fun onPause() {
-        super.onPause()
-        gyroscope.stop()
     }
 }

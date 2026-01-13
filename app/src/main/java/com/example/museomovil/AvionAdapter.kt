@@ -51,11 +51,16 @@ class AvionAdapter(private val listaAviones: List<Avion>, private val context: C
             holder.txtEstado.text = "DESBLOQUEADO"
             holder.txtEstado.setTextColor(context.getColor(android.R.color.holo_green_dark))
 
-            // Acción del botón 3D -> Ir a tu pantalla de Vista3DActivity
+            // Acción del botón 3D -> Pasar el archivo del modelo
             holder.btn3D.setOnClickListener {
-                val intent = Intent(context, Vista3DActivity::class.java)
-                // Aquí podrías pasar datos extra si quisieras cargar modelos distintos
-                context.startActivity(intent)
+                if (avion.modelo3D != null) {
+                    val intent = Intent(context, Vista3DActivity::class.java)
+                    intent.putExtra("MODEL_FILE", avion.modelo3D)
+                    intent.putExtra("MODEL_NAME", avion.nombre)
+                    context.startActivity(intent)
+                } else {
+                    Toast.makeText(context, "Este avión no tiene modelo 3D disponible", Toast.LENGTH_SHORT).show()
+                }
             }
 
             // --- LÓGICA BOTÓN AR (NUEVO) ---
