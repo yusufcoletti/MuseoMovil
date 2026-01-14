@@ -309,25 +309,28 @@ class MenuActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     private fun activarModoLector() {
         val options = Bundle()
-        // Flags para leer todo tipo de etiquetas
+
+        // --- CORRECCIÓN AQUÍ ---
+        // Añadimos FLAG_READER_NO_PLATFORM_SOUNDS
+        // Esto le dice a Android: "No hagas tu sonido ni muestres tu pantalla de 'Nueva etiqueta', yo me encargo de todo".
         val flags = NfcAdapter.FLAG_READER_NFC_A or
                 NfcAdapter.FLAG_READER_NFC_B or
                 NfcAdapter.FLAG_READER_NFC_F or
-                NfcAdapter.FLAG_READER_NFC_V
+                NfcAdapter.FLAG_READER_NFC_V or
+                NfcAdapter.FLAG_READER_NO_PLATFORM_SOUNDS
 
         nfcAdapter?.enableReaderMode(this, { tag ->
             val idLeido = leerIdDesdeTag(tag)
 
             runOnUiThread {
                 if (idLeido != null && idLeido.isNotEmpty()) {
-                    // 1. ¡CERRAR LO PRIMERO!
-                    // Quitamos el diálogo de escaneo inmediatamente para que no estorbe
+                    // 1. Cerrar diálogo visual nuestro
                     nfcDialog?.dismiss()
 
-                    // 2. Detenemos el lector para no leer dos veces
+                    // 2. Detener escaneo para evitar lecturas dobles
                     detenerEscaneoNFC()
 
-                    // 3. Vibración de confirmación (Feedback sutil)
+                    // 3. Vibración manual (Como silenciamos la del sistema, esta es la única que se sentirá)
                     val v = getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
                     if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
                         v.vibrate(VibrationEffect.createOneShot(100, VibrationEffect.DEFAULT_AMPLITUDE))
@@ -335,11 +338,10 @@ class MenuActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                         v.vibrate(100)
                     }
 
-                    // 4. Navegamos DIRECTAMENTE (Sin Toast ni mensajes)
+                    // 4. Navegar
                     irACatalogo(idLeido)
 
                 } else {
-                    // Solo mostramos mensaje si hay ERROR
                     Toast.makeText(this, "Error de lectura. Inténtalo de nuevo.", Toast.LENGTH_SHORT).show()
                 }
             }
