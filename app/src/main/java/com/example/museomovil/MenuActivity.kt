@@ -309,7 +309,7 @@ class MenuActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     private fun activarModoLector() {
         val options = Bundle()
-        // IMPORTANTE: Usamos estos flags para permitir leer cualquier etiqueta y asegurar que Android chequee NDEF
+        // Flags para leer todo tipo de etiquetas
         val flags = NfcAdapter.FLAG_READER_NFC_A or
                 NfcAdapter.FLAG_READER_NFC_B or
                 NfcAdapter.FLAG_READER_NFC_F or
@@ -320,14 +320,27 @@ class MenuActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
             runOnUiThread {
                 if (idLeido != null && idLeido.isNotEmpty()) {
-                    // Éxito: Cerramos todo y navegamos
+                    // 1. ¡CERRAR LO PRIMERO!
+                    // Quitamos el diálogo de escaneo inmediatamente para que no estorbe
                     nfcDialog?.dismiss()
+
+                    // 2. Detenemos el lector para no leer dos veces
                     detenerEscaneoNFC()
-                    Toast.makeText(this, "Avión detectado: $idLeido", Toast.LENGTH_LONG).show()
+
+                    // 3. Vibración de confirmación (Feedback sutil)
+                    val v = getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
+                    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                        v.vibrate(VibrationEffect.createOneShot(100, VibrationEffect.DEFAULT_AMPLITUDE))
+                    } else {
+                        v.vibrate(100)
+                    }
+
+                    // 4. Navegamos DIRECTAMENTE (Sin Toast ni mensajes)
                     irACatalogo(idLeido)
+
                 } else {
-                    // Fallo de lectura (etiqueta vacía o error)
-                    Toast.makeText(this, "Error al leer. Asegúrate de que la etiqueta tiene texto grabado.", Toast.LENGTH_SHORT).show()
+                    // Solo mostramos mensaje si hay ERROR
+                    Toast.makeText(this, "Error de lectura. Inténtalo de nuevo.", Toast.LENGTH_SHORT).show()
                 }
             }
         }, flags, options)
